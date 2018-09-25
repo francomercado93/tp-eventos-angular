@@ -1,7 +1,51 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
 
-<div class = "container-fluid"  class="p-3 mb-2 bg-primary text-white">
-    <h1>Event OS</h1>
+<div class="container-fluid bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <h1 class="navbar-brand mr-auto" href="#">Event OS</h1>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary">Mis Eventos</button>
+            <button type="button" class="btn btn-primary">Perfil</button>
+        </div>
+    </nav>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="btn-group-vertical">
+                <button type="button" class="btn btn-ligth">Agenda</button>
+                <button type="button" class="btn btn-ligth">Organizados por mi</button>
+                <button type="button" class="btn btn-ligth">Pendientes</button>
+            </div>
+        </div>
+        <div class="col-8">
+            <h2><b>Agenda</b></h2>
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Nombre evento</th>
+                        <th scope="col">Ubicacion</th>
+                        <th scope="col">Organizador</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10/07</td>
+                        <td>Lolla</td>
+                        <td>Hipodromo</td>
+                        <td>Pedro</td>
 
-
+                    </tr>
+                    <tr>
+                        <td>19/08</td>
+                        <td>Fiesta</td>
+                        <td>Bar7</td>
+                        <td>Juan</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
