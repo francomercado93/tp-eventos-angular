@@ -4,48 +4,70 @@
 <div class="container-fluid bg-primary">
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <h1 class="navbar-brand mr-auto" href="#">Event OS</h1>
-        <div class="btn-group" role="group">
+        <div class="btn-group">
             <button type="button" class="btn btn-primary">Mis Eventos</button>
             <button type="button" class="btn btn-primary">Perfil</button>
         </div>
     </nav>
 </div>
-<div class="container">
+<div class="container-fluid mt-2">
     <div class="row">
-        <div class="col-4">
+        <div class="col-sm-2 p-2">
             <div class="btn-group-vertical">
-                <button type="button" class="btn btn-ligth">Agenda</button>
-                <button type="button" class="btn btn-ligth">Organizados por mi</button>
-                <button type="button" class="btn btn-ligth">Pendientes</button>
+                <button type="button" class="btn btn-light text-left">Agenda</button>
+                <button type="button" class="btn btn-light text-left">Organizados por mi</button>
+                <button type="button" class="btn btn-light text-left">Pendientes</button>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-sm-10 p-5">
             <h2><b>Agenda</b></h2>
-            <table class="table table-borderless">
-                <thead>
-                    <tr>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Nombre evento</th>
-                        <th scope="col">Ubicacion</th>
-                        <th scope="col">Organizador</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>10/07</td>
-                        <td>Lolla</td>
-                        <td>Hipodromo</td>
-                        <td>Pedro</td>
+            <br>
+            <div class="container-fluid border m-2">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="4">Hoy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10/07/2018 12:00</td>
+                            <td>Lolla</td>
+                            <td>Hipodromo</td>
+                            <td>Pedro</td>
 
-                    </tr>
-                    <tr>
-                        <td>19/08</td>
-                        <td>Fiesta</td>
-                        <td>Bar7</td>
-                        <td>Juan</td>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                        <tr>
+                            <td>19/08/2018 19:30</td>
+                            <td>Fiesta</td>
+                            <td>Bar7</td>
+                            <td>Juan</td>
+                        </tr>
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="4">Esta semana</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>19/08/2018 19:30</td>
+                            <td>Fiesta</td>
+                            <td>Bar7</td>
+                            <td>Juan</td>
+                        </tr>
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="4">Proximos</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>19/08/2018 19:30</td>
+                            <td>Fiesta</td>
+                            <td>Bar7</td>
+                            <td>Juan</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
