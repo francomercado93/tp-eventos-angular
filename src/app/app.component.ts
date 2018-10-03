@@ -12,9 +12,9 @@ export class AppComponent {
   title = 'app'
   
   
-  diego = new Usuario("Diego","profesional","diegazo@gmail.com",45,"C:\Users\Leo\Documents\eg-amigos-web-master\images\leo.jpg");
-  carlo=new Usuario("Carlo","free","carlazo@gmail.com",124,"unLink")
-  mario=  new Usuario("Mario","Profesional","mariazo@gmail.com",38,"unLink")
+  diego = new Usuario("Diego","profesional","diegazo@gmail.com",45,"C:\Users\Leo\Documents\eg-amigos-web-master\images\leo.jpg","apodo");
+  carlo=new Usuario("Carlo","free","carlazo@gmail.com",124,"unLink","apodo2")
+  mario=  new Usuario("Mario","Profesional","mariazo@gmail.com",38,"unLink","apodo3")
   
 
 
