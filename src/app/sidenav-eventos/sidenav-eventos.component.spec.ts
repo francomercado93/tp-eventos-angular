@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SidenavEventosComponent } from './sidenav-eventos.component';
 
-import { EventosComponent } from './eventos.component';
 
-describe('EventosComponent', () => {
-  let component: EventosComponent;
-  let fixture: ComponentFixture<EventosComponent>;
+describe('SidenavEventosComponent', () => {
+  let component: SidenavEventosComponent;
+  let fixture: ComponentFixture<SidenavEventosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventosComponent ]
+      declarations: [ SidenavEventosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventosComponent);
+    fixture = TestBed.createComponent(SidenavEventosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

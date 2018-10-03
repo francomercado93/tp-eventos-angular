@@ -6,17 +6,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import 'hammerjs';
+import { AgendaComponent } from './single/agenda/agenda.component';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './share/toolbar/toolbar.component';
+import { SidenavEventosComponent } from './sidenav-eventos/sidenav-eventos.component';
 import { PerfilComponent } from './single/perfil/perfil.component';
-import { EventosComponent } from './single/eventos/eventos.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ToolbarComponent,
         PerfilComponent,
-        EventosComponent
+        SidenavEventosComponent,
+        AgendaComponent,
+        SidenavEventosComponent
 
     ],
     imports: [
