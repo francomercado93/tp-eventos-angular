@@ -1,28 +1,35 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import 'hammerjs';
-import { FiltroTablaComponent } from './single/filtro-tabla/filtro-tabla.component';
+import { AgendaComponent } from './single/agenda/agenda.component';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './share/toolbar/toolbar.component';
 import { SidenavEventosComponent } from './sidenav-eventos/sidenav-eventos.component';
-import { AgendaComponent } from './single/agenda/agenda.component';
+import { PerfilComponent } from './single/perfil/perfil.component';
+import {MatTableModule} from '@angular/material/table';
+import { AmigosMiPerfilComponent } from './single/amigosMiPerfil/amigosMiPerfil.component';
+import { InvitacionesPendientesComponent } from'./single/InvitacionesPendientes/InvitacionesPendientes.component';
+import { OrganizadosPorMiComponent } from './single/OrganizadosPorMi/OrganizadosPorMi.component';
 
+import { AppRoutingModule, routingComponents } from './app-routing.module'
 
 @NgModule({
     declarations: [
         AppComponent,
         ToolbarComponent,
+        PerfilComponent,
         SidenavEventosComponent,
         AgendaComponent,
         SidenavEventosComponent,
-        FiltroTablaComponent
+        AmigosMiPerfilComponent,
+        InvitacionesPendientesComponent,
+        OrganizadosPorMiComponent,
+        routingComponents
 
     ],
     imports: [
@@ -33,7 +40,7 @@ import { AgendaComponent } from './single/agenda/agenda.component';
         MatListModule,
         MatGridListModule,
         MatTableModule,
-        MatFormFieldModule
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [
