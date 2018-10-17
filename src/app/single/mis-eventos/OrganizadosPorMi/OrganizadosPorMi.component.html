@@ -1,9 +1,9 @@
 <h2 style=text-align:center>
   Organizados por mi </h2>
 <div class="row">
-  <!-- <div class="col-sm-2 p-2">
+   <div class="col-sm-2 p-2">
     <app-sidenav-eventos></app-sidenav-eventos>
-  </div> -->
+  </div> 
   <div class="col-sm-10 p-5">
 
     <table class="table table-hover">
@@ -46,7 +46,7 @@
     <div class="row">
       <div class="col-sm-7 p-5"></div>
       <div class="col-sm-5 p-10">
-        <button mat-stroked-button color="primary">Nuevo Evento Abierto</button>
+        <button mat-stroked-button color="primary" [routerLink]="['/misEventos/nuevo-evento-abierto']" >Nuevo Evento Abierto</button>
         <button mat-stroked-button color="primary">Nuevo Evento Cerrado</button>
       </div>
 

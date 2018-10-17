@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FiltroTablaComponent } from './filtro-tabla.component';
+import { MisEventosComponent } from './mis-eventos.component';
 
-describe('FiltroTablaComponent', () => {
-  let component: FiltroTablaComponent;
-  let fixture: ComponentFixture<FiltroTablaComponent>;
+describe('MisEventosComponent', () => {
+  let component: MisEventosComponent;
+  let fixture: ComponentFixture<MisEventosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FiltroTablaComponent ]
+      declarations: [ MisEventosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FiltroTablaComponent);
+    fixture = TestBed.createComponent(MisEventosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
