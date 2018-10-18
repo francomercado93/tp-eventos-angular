@@ -16,7 +16,6 @@ import { OrganizadosPorMiModule } from './OrganizadosPorMi/OrganizadosPorMi.modu
     MisEventosComponent,
     AgendaComponent,
     InvitacionesPendientesComponent,
-
     SidenavEventosComponent,
   ]
 })
