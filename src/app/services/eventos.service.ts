@@ -10,12 +10,10 @@ export class EventosService {
 
   eventos: Array<Evento>;
 
-  fechaInicio: Date
   constructor() {
-    // this.fechaInicio = new Date(2018, 08, 25, 16, 30)
     this.eventos = [
-      new Evento('Cumple pepe', 'Casa de Manolo', 'Manolo'),
-      new Evento('Recital Pepo', 'Bar 3', 'Manager')
+      new Evento('Cumple pepe', new Date(2018, 6, 5, 16, 30), 'Casa de Manolo', 'Manolo'),
+      new Evento('Recital Pepo', new Date(2018, 10, 15, 19, 15), 'Bar 3', 'Manager')
     ]
   }
 }

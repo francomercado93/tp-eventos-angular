@@ -1,11 +1,11 @@
 export class Evento {
     nombreEvento: string
-    // inicioEvento: Date fechaInicio
+    inicioEvento: Date
     locacion: string
     organizador: string
-    constructor(nombre,  lugar, organizadorEvento) {
+    constructor(nombre, fechaInicio, lugar, organizadorEvento) {
         this.nombreEvento = nombre;
-        // this.inicioEvento = fechaInicio;
+        this.inicioEvento = fechaInicio;
         this.locacion = lugar;
         this.organizador = organizadorEvento
     }
