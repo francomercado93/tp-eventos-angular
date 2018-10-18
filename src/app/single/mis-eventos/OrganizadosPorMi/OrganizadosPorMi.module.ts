@@ -9,22 +9,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import 'hammerjs';
 
-
-//import { ToolbarComponent } from './share/toolbar/toolbar.component';
-
-
-import {MatTableModule} from '@angular/material/table';
-
+import { MatTableModule } from '@angular/material/table';
 
 import { OrganizadosPorMiComponent } from './OrganizadosPorMi.component';
+import { NuevoEventoAbiertoComponent } from './nuevo-evento-abierto/nuevo-evento-abierto.component';
 
 @NgModule({
     declarations: [
-       
-       // ToolbarComponent,
-
-        OrganizadosPorMiComponent
-
+        OrganizadosPorMiComponent,
+        NuevoEventoAbiertoComponent
     ],
     imports: [
         BrowserModule,
@@ -33,7 +26,7 @@ import { OrganizadosPorMiComponent } from './OrganizadosPorMi.component';
         MatButtonModule,
         MatListModule,
         MatGridListModule,
-        MatTableModule
+        MatTableModule,
     ],
     providers: [],
     bootstrap: [
@@ -42,9 +35,9 @@ import { OrganizadosPorMiComponent } from './OrganizadosPorMi.component';
 })
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [OrganizadosPorMiComponent]
+    imports: [
+        CommonModule
+    ],
+    declarations: [OrganizadosPorMiComponent, NuevoEventoAbiertoComponent]
 })
 export class OrganizadosPorMiModule { }
