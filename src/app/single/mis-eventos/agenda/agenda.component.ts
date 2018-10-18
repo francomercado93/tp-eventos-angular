@@ -9,14 +9,13 @@ import { EventosService } from 'src/app/services/eventos.service';
 })
 export class AgendaComponent implements OnInit {
 
-  eventos: Array<Evento>=[]
-
+  eventosHoy: Array<Evento> = []
+  hoy: Date
   constructor(private eventoService: EventosService) {
   }
 
   ngOnInit(): void {
-    this.eventos = this.eventoService.eventos
+    this.hoy = new Date(2018,6,5)
+    this.eventosHoy = this.eventoService.eventos.filter(evento => evento.inicioEvento.getTime === this.hoy.getTime)
   }
-
-
 }

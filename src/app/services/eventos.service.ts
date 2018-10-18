@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Evento } from "src/model/evento";
+import { EVENTOS } from 'src/model/eventosStub';
 
 
 @Injectable({
@@ -8,12 +9,13 @@ import { Evento } from "src/model/evento";
 
 export class EventosService {
 
-  eventos: Array<Evento>;
+  eventos: Evento[]
 
   constructor() {
-    this.eventos = [
-      new Evento('Cumple pepe', new Date(2018, 6, 5, 16, 30), 'Casa de Manolo', 'Manolo'),
-      new Evento('Recital Pepo', new Date(2018, 10, 15, 19, 15), 'Bar 3', 'Manager')
-    ]
+    this.eventos = EVENTOS
   }
+
+  // eventosHoy() {
+  //   return this.eventos
+  // }
 }
