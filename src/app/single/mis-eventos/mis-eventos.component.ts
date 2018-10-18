@@ -9,12 +9,9 @@ import { Evento } from "src/model/evento";
 })
 export class MisEventosComponent implements OnInit {
 
-  constructor(private eventoService :EventosService) { 
-   
-   
+  constructor() {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-
 }

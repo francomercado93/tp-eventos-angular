@@ -15,7 +15,8 @@ import { ToolbarComponent } from './share/toolbar/toolbar.component';
 import { PerfilModule } from './single/perfil/perfil.module';
 import { MisEventosModule } from './single/mis-eventos/mis-eventos.module';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule} from './app-routing.module';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
         ToolbarComponent,
     ],
     imports: [
+        CommonModule,
         BrowserModule,
         MatToolbarModule,
         MatIconModule,
