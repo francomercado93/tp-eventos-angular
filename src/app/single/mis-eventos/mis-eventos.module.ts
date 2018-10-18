@@ -6,9 +6,11 @@ import { InvitacionesPendientesComponent } from './InvitacionesPendientes/Invita
 import { MisEventosComponent } from './mis-eventos.component';
 import { MisEventosRoutingModule } from './mis-eventos-routing.module';
 import { OrganizadosPorMiModule } from './OrganizadosPorMi/OrganizadosPorMi.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
+    CommonModule,
     MisEventosRoutingModule,
     OrganizadosPorMiModule
   ],

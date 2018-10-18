@@ -9,15 +9,9 @@ import { Evento } from "src/model/evento";
 })
 export class MisEventosComponent implements OnInit {
 
-  eventoComponente = '';
-  constructor(private eventoService :EventosService) { 
-   
-   
+  constructor() {
   }
 
-  ngOnInit() {
-    console.log(this.eventoService.unEvento.nombre);
-    this.eventoComponente = this.eventoService.unEvento.nombre;
+  ngOnInit(): void {
   }
-
 }
