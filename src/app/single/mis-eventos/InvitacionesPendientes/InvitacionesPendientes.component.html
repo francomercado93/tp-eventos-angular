@@ -1,57 +1,33 @@
-<h2 style=text-align:center>Invitaciones Pendientes </h2>
-
-
-<div class="row">
-   <div class="col-sm-2 p-2">
-    <!-- <app-sidenav-eventos></app-sidenav-eventos> -->
-  </div> 
-  <div class="col-sm-10 p-5">
-    <div class="container-fluid border m-2">
-      <table class="table table-hover">
-        <tr>
-          <th>Fecha</th>
-          <th>Evento</th>
-          <th>Lugar</th>
-          <th>Organizador</th>
-          <th>Acompañantes</th>
-          <th>Aceptar/Rechazar</th>
-        </tr>
-        <tr>
-          <td>15/2/91</td>
-          <td>Recital</td>
-          <td>Obras</td>
-          <td>Diego Gonzalez</td>
-          <td>4</td>
-          <td><i class="fas fa-check-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i
-              class="fas fa-times"></i>
-          </td>
-
-
-        </tr>
-        <tr>
-          <td>15/2/91</td>
-          <td>Recital</td>
-          <td>Obras</td>
-          <td>Diego Gonzalez</td>
-          <td>4</td>
-          <td><i class="fas fa-check-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <i
-              class="fas fa-times"></i>
-          </td>
-          <tr>
-            <td>15/2/91</td>
-            <td>Recital</td>
-            <td>Obras</td>
-            <td>Diego Gonzalez</td>
-            <td>4</td>
-            <td><i class="fas fa-check-circle"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <i
-                class="fas fa-times"></i>
-            </td>
-          </tr>
-      </table>
-
-    </div>
+<h2 style=text-align:center><b>Invitaciones Pendientes</b></h2>
+<br>
+<div class="container-fluid border m-2">
+  <table class="table table-hover">
+    <tr>
+      <th>Fecha</th>
+      <th>Evento</th>
+      <th>Lugar</th>
+      <th>Organizador</th>
+      <th>Acompañantes</th>
+      <th>Aceptar/Rechazar</th>
+    </tr>
+    <tr *ngFor="let invitacion of invitacionesPendientes">
+      <td>{{invitacion.evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
+      <td>{{invitacion.evento.nombreEvento}}</td>
+      <td>{{invitacion.evento.locacion}}</td>
+      <td>{{invitacion.evento.organizador.username}}</td>
+      <td>{{invitacion.cantidadAcompaniantesMaxima}}</td>
+      <td><button type="button" title="Confirmar invitacion" class="btn btn-default" (click)="confirmarInvitacion(invitacion)"
+          aria-label="Confirmar" [disabled]="estaPendiente(invitacion)">
+          <i class="fas fa-check-circle"></i>
+        </button>
+        <button type="button" title="Rechazar invitacion" class="btn btn-default" (click)="rechazarInvitacion(invitacion)"
+          aria-label="Rechazar">
+          <i class="fas fa-times"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
   </div>
 </div>

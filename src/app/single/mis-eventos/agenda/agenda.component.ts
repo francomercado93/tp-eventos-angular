@@ -11,7 +11,7 @@ export class AgendaComponent implements OnInit {
 
   eventosHoy: Array<Evento> = [];
   eventosEstaSemana: Array<Evento> = []
-  eventosProximos: Array<Evento> = [];
+  eventosProximos: Array<Evento> = []
   constructor(private eventoService: EventosService) {
   }
 

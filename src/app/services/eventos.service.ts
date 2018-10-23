@@ -9,33 +9,37 @@ import { EVENTOS } from 'src/model/domain/juegoDatos/eventosStub';
 
 export class EventosService {
 
-  eventos: Evento[]
+  eventos: Evento[];
   hoy: Date;
 
   constructor() {
     this.eventos = EVENTOS
+    
   }
 
   get eventosHoy() {
-    return this.eventos.filter(evento => evento.inicioEvento.getDate() == this.fechaHoy.getDate())
+    return this.eventos.filter(evento => evento.inicioEvento.getDate() == fechaHoy().getDate())
   }
 
   get eventosEstaSemana() {//revisar
     return this.eventos.filter(evento =>
-      ((this.fechaHoy.getTime() - evento.inicioEvento.getTime() >= -432000000
-      && this.fechaHoy.getTime() - evento.inicioEvento.getTime() <= 0 )||
-      (this.fechaHoy.getTime() - evento.inicioEvento.getTime() <= 432000000 &&
-        this.fechaHoy.getTime() - evento.inicioEvento.getTime() >= 0))
+      ((fechaHoy().getTime() - evento.inicioEvento.getTime() >= -432000000
+      && fechaHoy().getTime() - evento.inicioEvento.getTime() <= 0 )||
+      (fechaHoy().getTime() - evento.inicioEvento.getTime() <= 432000000 &&
+      fechaHoy().getTime() - evento.inicioEvento.getTime() >= 0))
     )
   }
 
   get eventosProximos() {
     return this.eventos.filter(evento =>
-      evento.inicioEvento.getTime() >= this.fechaHoy.getTime() + 432000000)
+      evento.inicioEvento.getTime() >= fechaHoy().getTime() + 432000000)
   }
 
-  get fechaHoy() {
-    return new Date(2018, 6, 5)
-  }
+  // get fechaHoy() {
+  //   return new Date(2018, 6, 5)
+  // }
 }
 
+export function fechaHoy(){
+  return new Date(2018, 6, 5)
+}

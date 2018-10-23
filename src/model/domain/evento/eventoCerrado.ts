@@ -5,14 +5,26 @@ export class EventoCerrado extends Evento {
 
     invitadosConfirmados: Array<Usuario> = []
 
-    // override cumpleCondiciones(Usuario invitado){
-    //     super.usuarioEstaATiempo(invitado)
-    // }
+    constructor(nombre, fechaInicio, lugar, organizadorEvento, fechaMaximaConfirmacion) {
+        super(nombre, fechaInicio, lugar, organizadorEvento);
+        this.fechaMaximaConfirmacion = fechaMaximaConfirmacion
+    }
 
-    // confirmarUsuario(Usuario invitado): void {
-    //     if (this.cumpleCondiciones(invitado)) {
-    //         this.agregarListaConfirmado(invitado)
-    //     } else
-    //         throw ("Usuario paso la fecha maxima de confirmacion ")
-    // }
+    usuarioRechazaInvitacion(invitado: Usuario) {
+        this.removerUsuario(invitado)
+    }
+    cumpleCondiciones(invitado: Usuario) {
+        return super.usuarioEstaATiempo(invitado)
+    }
+
+    confirmarUsuario(invitado: Usuario): void {
+        if (this.cumpleCondiciones(invitado)) {
+            this.agregarListaConfirmado(invitado)
+        } else
+            throw ("Usuario paso la fecha maxima de confirmacion ")
+    }
+    agregarListaConfirmado(unUsuario: Usuario) {
+        this.invitadosConfirmados.push(unUsuario)
+        super.removerUsuario(unUsuario)
+    }
 }
