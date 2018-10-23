@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EventosService } from "src/app/services/eventos.service";
-import { Evento } from "src/model/evento";
 
 @Component({
   selector: 'app-mis-eventos',

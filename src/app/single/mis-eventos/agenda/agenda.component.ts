@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Evento } from 'src/model/evento';
 import { EventosService } from 'src/app/services/eventos.service';
+import { Evento } from 'src/model/domain/evento/evento';
 
 @Component({
   selector: 'app-agenda',
@@ -9,13 +9,16 @@ import { EventosService } from 'src/app/services/eventos.service';
 })
 export class AgendaComponent implements OnInit {
 
-  eventosHoy: Array<Evento> = []
-  hoy: Date
+  eventosHoy: Array<Evento> = [];
+  eventosEstaSemana: Array<Evento> = []
+  eventosProximos: Array<Evento> = [];
   constructor(private eventoService: EventosService) {
   }
 
   ngOnInit(): void {
-    this.hoy = new Date(2018,6,5)
-    this.eventosHoy = this.eventoService.eventos.filter(evento => evento.inicioEvento.getTime === this.hoy.getTime)
+    this.eventosHoy = this.eventoService.eventosHoy
+    this.eventosEstaSemana = this.eventoService.eventosEstaSemana
+    this.eventosProximos = this.eventoService.eventosProximos
   }
 }
+

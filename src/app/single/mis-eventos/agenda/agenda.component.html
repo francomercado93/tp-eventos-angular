@@ -1,3 +1,4 @@
+<h1>{{fechaTest }}</h1>
 <h2 style=text-align:center><b>Agenda</b></h2>
 <br>
 <div class="container-fluid border m-2">
@@ -9,7 +10,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let evento of eventosHoy">
-        <td>{{evento.inicioEvento}}</td>
+        <!-- <app-evento-detail [evento]="evento"></app-evento-detail> -->
+        <td>{{evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
         <td>{{evento.nombreEvento}}</td>
         <td>{{evento.locacion}}</td>
         <td>{{evento.organizador}}</td>
@@ -19,25 +21,24 @@
           <th scope="col" colspan="4">Esta semana</th>
         </tr>
       </thead>
-      <tr>
-        <td>19/08/2018 19:30</td>
-        <td>Fiesta</td>
-        <td>Bar7</td>
-        <td>Juan</td>
+      <tr *ngFor="let evento of eventosEstaSemana">
+        <!-- <app-evento-detail [evento]="evento"></app-evento-detail> -->
+        <td>{{evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
+        <td>{{evento.nombreEvento}}</td>
+        <td>{{evento.locacion}}</td>
+        <td>{{evento.organizador}}</td>
       </tr>
       <thead>
         <tr>
           <th scope="col" colspan="4">Proximos</th>
         </tr>
       </thead>
-      <tr>
-        <td>19/08/2018 19:30</td>
-        <td>Fiesta</td>
-        <td>Bar7</td>
-        <td>Juan</td>
+      <tr *ngFor="let evento of eventosProximos">
+        <td>{{evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
+        <td>{{evento.nombreEvento}}</td>
+        <td>{{evento.locacion}}</td>
+        <td>{{evento.organizador}}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<!-- </div>
-</div> -->
