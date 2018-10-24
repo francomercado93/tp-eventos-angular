@@ -17,6 +17,8 @@ export class Usuario {
     entradasCompradas: Array<Entrada> = []
     fechaHoraActual: Date;
     tipoUsuario: TipoUsuario;
+    eventosOrganizados: Array<Evento> =  []
+    
     
     constructor(nombre: string, apellido: string, username: string, email: string, tipoUsuario: TipoUsuario) {
         this.nombre = nombre
@@ -34,8 +36,8 @@ export class Usuario {
     get cantidadAmigos(){
         return this.amigos.length
     }
-    eliminarAmigo(){
-        this.amigos.pop()
+    eliminarAmigo(amigo: Usuario){
+        this.amigos.splice(this.amigos.indexOf(amigo), 1)
     }
 
     

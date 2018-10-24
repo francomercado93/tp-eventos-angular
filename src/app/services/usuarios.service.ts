@@ -24,11 +24,16 @@ export class UsuariosService {
     let muestraCanto = new EventoAbierto('Muestra canto', new Date(2018, 11, 26, 15, 0), 'Teatro', organizador2);
     let muestraCanto2 = new EventoAbierto('Muestra canto2', new Date(2019, 1, 3, 19, 0), 'Teatro', organizador1);
 
-    let quinceMaria = new EventoCerrado('Quince Maria', new Date(2018, 11, 14, 22, 0), 'Salon Elegante', organizador2, new Date(2018, 10, 14, 22, 0))
+    
+    let quinceMaria = new EventoCerrado('Quince Maria', new Date(2018, 11, 11, 22, 11), 'Salon Elegante', organizador2, new Date(2018, 10, 14, 22, 0))
     this.usuarioTest.amigos = AMIGOS;
-    this.usuarioTest.recibirInvitacion(new Invitacion(this.usuarioTest, cumplePepe, 5));
+    let invitacionPepe = new Invitacion(this.usuarioTest, cumplePepe, 5)
+    invitacionPepe.agregarListaAsistentesEventoCerrado;
+    this.usuarioTest.recibirInvitacion(invitacionPepe);
     this.usuarioTest.recibirInvitacion(new Invitacion(this.usuarioTest, casamiento, 2));
     this.usuarioTest.recibirInvitacion(new Invitacion(this.usuarioTest, casamientoLaura, 1));
     this.usuarioTest.recibirInvitacion(new Invitacion(this.usuarioTest, quinceMaria, 3));
+    let invTest = new Invitacion(this.usuarioTest, quinceMaria, 10)
+    this.usuarioTest.invitaciones.push(invTest)
   }
 }

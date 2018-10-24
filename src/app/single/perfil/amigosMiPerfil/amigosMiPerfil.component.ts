@@ -19,8 +19,8 @@ export class AmigosMiPerfilComponent implements OnInit {
     this.amigos = this.usuario.amigos
   }
 
-  eliminarAmigo(){
-    this.usuario.eliminarAmigo()
+  eliminarAmigo(amigo: Usuario){
+    this.usuario.eliminarAmigo(amigo)
   }
 
 }

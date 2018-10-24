@@ -1,3 +1,5 @@
+import { Evento } from '../../../../model/domain/evento/evento';
+import { OrganizadosPorMiService } from '../../../services/organizadosPorMi.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./OrganizadosPorMi.component.css']
 })
 export class OrganizadosPorMiComponent implements OnInit {
-
-  constructor() { }
+  
+  organizadosPorMi: Array<Evento>
+  
+  constructor(private organizadosService: OrganizadosPorMiService) { }
 
   ngOnInit() {
+    this.organizadosPorMi = this.organizadosService.eventosOrganizados
   }
 
 }

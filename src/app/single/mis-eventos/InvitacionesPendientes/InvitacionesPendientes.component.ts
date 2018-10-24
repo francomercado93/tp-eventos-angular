@@ -14,14 +14,15 @@ export class InvitacionesPendientesComponent implements OnInit {
   invitacionesPendientes: Array<Invitacion> = [];
   errorMessage: string;
 
-  constructor(public invitacionesService: InvitacionesService) { }
+  constructor(private invitacionesService: InvitacionesService) { }
 
   ngOnInit() {
-    this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes
+    this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes.filter(invitacion => invitacion.estaPendiente)
   }
 
   confirmarInvitacion(invitacion: Invitacion) {
     try {
+      console.log(invitacion);
       this.errorMessage = ""
       invitacion.confirmar(invitacion.cantidadAcompaniantesMaxima)
     } catch (errorValidation) {
@@ -29,7 +30,9 @@ export class InvitacionesPendientesComponent implements OnInit {
     }
   }
   rechazarInvitacion(invitacion: Invitacion){
+    console.log(invitacion);
     invitacion.rechazar()
+    // this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes //?
   }
   estaPendiente(invitacion: Invitacion) {
     invitacion.estaPendiente

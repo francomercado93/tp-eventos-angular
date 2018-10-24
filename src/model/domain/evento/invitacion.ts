@@ -5,7 +5,6 @@ export class Invitacion {
     evento: EventoCerrado
     invitado: Usuario
     cantidadAcompaniantesMaxima: number
-    cantidadAcompaniantesConfirmados: number
     // estaRechazado = false
     // estaConfirmado = false
     estaPendiente: boolean;
@@ -15,25 +14,27 @@ export class Invitacion {
         this.cantidadAcompaniantesMaxima = unaCantidadAcompaniantesMaxima
         this.evento = unEvento
         this.estaPendiente = true
+        // this.evento.agregarAsistente(this.invitado)
     }
-    agregarListaAsistentesEventoCerrado(){
-        this.evento.asistentes.push(this.invitado)      //agrega a la lista de asistentes posibles
+    agregarListaAsistentesEventoCerrado() {
+        console.log(this.invitado.nombre)
+        this.evento.agregarAsistente(this.invitado)
     }
-    
+
     confirmar(cantidadAcompaniantesInvitado: number): void {
-        this.cantidadAcompaniantesConfirmados = cantidadAcompaniantesInvitado
-        if (this.cantidadAcompaniantesConfirmados <= this.cantidadAcompaniantesMaxima) {
+
+        if (cantidadAcompaniantesInvitado <= this.cantidadAcompaniantesMaxima) {
             this.evento.confirmarUsuario(this.invitado)
             this.estaPendiente = false
-            console.log("estaPendiente = false")
         }
         else
             throw ("La cantidad de acompaniantes supera la maxima permitida en la invitacion")
     }
 
-    rechazar(){
+    rechazar() {
         this.estaPendiente = false
-        this.evento.usuarioRechazaInvitacion(this.invitado)
+        console.log(this.estaPendiente)
+        // this.evento.usuarioRechazaInvitacion(this.invitado)
     }
 
     // recibirNotificacionNuevaInvitacion(): void {

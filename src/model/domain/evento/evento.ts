@@ -5,8 +5,8 @@ export class Evento {
     inicioEvento: Date
     locacion: string
     organizador: Usuario
-    fechaMaximaConfirmacion: Date;
-    asistentes: Array<Usuario>;
+    fechaMaximaConfirmacion: Date
+    asistentes: Array<Usuario>
 
     constructor(nombre, fechaInicio, lugar, organizadorEvento) {
         this.nombreEvento = nombre;
@@ -21,8 +21,10 @@ export class Evento {
     }
     
     removerUsuario(unUsuario: Usuario) { //no funciona
-        let indexUsr = this.asistentes.indexOf(unUsuario)
-        this.asistentes.splice(indexUsr, 1) 
+        console.log('DATO:  '+ unUsuario.nombre)
+        console.log('DATO2:  '+ this.asistentes)
+        // this.asistentes.length()
+        // this.asistentes.splice(this.asistentes.indexOf(unUsuario), 1) 
     }
     // cantidadDisponibles() { // Eventos abiertos => entradas, cerrados => invitaciones
     //     (this.capacidadMaxima() - this.cantidadAsistentesPosibles)

@@ -11,7 +11,9 @@
   <tr *ngFor="let amigo of amigos">
     <td>{{amigo.nombre}} {{amigo.apellido}}</td>
     <td>{{amigo.username}}</td>
-    <td><button type="button" title="Eliminar amigo" class="btn btn-default" (click)="eliminarAmigo()" aria-label="Eliminar">
-        <i class="fas fa-times"></i></button></td>
+    <td>
+      <button color="warn" type="button" title="Eliminar amigo" class="btn btn-danger" (click)="eliminarAmigo(amigo)" aria-label="Eliminar">
+        <i class="fas fa-times"></i></button>
+    </td>
   </tr>
 </table>

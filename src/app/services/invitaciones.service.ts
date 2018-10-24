@@ -8,9 +8,12 @@ import { UsuariosService } from './usuarios.service';
 })
 export class InvitacionesService {
 
-  invitacionesPendientes: Invitacion[]
+  // invitacionesPendientes: Invitacion[]
 
-  constructor(public usuarioServiceTest: UsuariosService) {
-    this.invitacionesPendientes = this.usuarioServiceTest.usuarioTest.invitaciones.filter(invitacion => invitacion.estaPendiente == true )}
+  constructor(private usuarioServiceTest: UsuariosService) {
+  }
 
+  get invitacionesPendientes() {
+    return this.usuarioServiceTest.usuarioTest.invitaciones
+  } 
 }

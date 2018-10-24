@@ -16,11 +16,11 @@
       <td>{{invitacion.evento.locacion}}</td>
       <td>{{invitacion.evento.organizador.username}}</td>
       <td>{{invitacion.cantidadAcompaniantesMaxima}}</td>
-      <td><button type="button" title="Confirmar invitacion" class="btn btn-default" (click)="confirmarInvitacion(invitacion)"
+      <td><button type="button" title="Confirmar invitacion" class="btn btn-success" (click)="confirmarInvitacion(invitacion)"
           aria-label="Confirmar" [disabled]="estaPendiente(invitacion)">
           <i class="fas fa-check-circle"></i>
-        </button>
-        <button type="button" title="Rechazar invitacion" class="btn btn-default" (click)="rechazarInvitacion(invitacion)"
+        </button>&nbsp;
+        <button type="button" title="Rechazar invitacion" class="btn btn-danger" (click)="rechazarInvitacion(invitacion)"
           aria-label="Rechazar">
           <i class="fas fa-times"></i>
         </button>
