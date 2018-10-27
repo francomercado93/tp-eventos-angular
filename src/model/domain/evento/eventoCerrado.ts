@@ -15,23 +15,23 @@ export class EventoCerrado extends Evento {
         this.fechaMaximaConfirmacion = fechaMaximaConfirmacion
     }
 
-    usuarioRechazaInvitacion(invitado: Usuario) {
-        this.removerUsuario(invitado)
-    }
+    // usuarioRechazaInvitacion(invitado: Usuario) {
+    //     this.removerUsuario(invitado)
+    // }
     cumpleCondiciones(invitado: Usuario) {
         return super.usuarioEstaATiempo(invitado)
     }
 
-    confirmarUsuario(invitado: Usuario): void {
-        if (this.cumpleCondiciones(invitado)) {
-            this.agregarListaConfirmado(invitado)
-        } else
-            throw ("Usuario paso la fecha maxima de confirmacion ")
-    }
-    agregarListaConfirmado(unUsuario: Usuario) {
+    // confirmarUsuario(invitado: Usuario): void {
+    //     if (this.cumpleCondiciones(invitado)) {
+    //         this.agregarListaConfirmado(invitado)
+    //     } else
+    //         throw ("Usuario paso la fecha maxima de confirmacion ")
+    // }
+    // agregarListaConfirmado(unUsuario: Usuario) {
 
-        console.log('DATO3:  ' + this.asistentes)
-        this.invitadosConfirmados.push(unUsuario)
-        super.removerUsuario(unUsuario)
-    }
+    //     console.log('DATO3:  ' + this.asistentes)
+    //     this.invitadosConfirmados.push(unUsuario)
+    //     super.removerUsuario(unUsuario)
+    // }
 }

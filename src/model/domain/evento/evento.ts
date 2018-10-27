@@ -20,12 +20,12 @@ export class Evento {
         return unUsuario.fechaHoraActual < (this.fechaMaximaConfirmacion)
     }
     
-    removerUsuario(unUsuario: Usuario) { //no funciona
-        console.log('DATO:  '+ unUsuario.nombre)
-        console.log('DATO2:  '+ this.asistentes)
-        // this.asistentes.length()
-        // this.asistentes.splice(this.asistentes.indexOf(unUsuario), 1) 
-    }
+    // removerUsuario(unUsuario: Usuario) { //no funciona
+    //     console.log('DATO:  '+ unUsuario.nombre)
+    //     console.log('DATO2:  '+ this.asistentes)
+    //     // this.asistentes.length()
+    //     // this.asistentes.splice(this.asistentes.indexOf(unUsuario), 1) 
+    // }
     // cantidadDisponibles() { // Eventos abiertos => entradas, cerrados => invitaciones
     //     (this.capacidadMaxima() - this.cantidadAsistentesPosibles)
     // }

@@ -7,7 +7,8 @@ import { PerfilComponent } from './perfil.component';
   imports: [
     CommonModule,
   ],
-  declarations: [AmigosMiPerfilComponent,
+  declarations: [
+    AmigosMiPerfilComponent,
     PerfilComponent]
 })
 export class PerfilModule { }

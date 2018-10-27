@@ -1,20 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Usuario } from 'src/model/domain/usuario/usuario';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Router } from '@angular/router';
+import { USRTESTID } from 'src/app/configuration';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css']
+  styleUrls: ['./perfil.component.css'],
+  providers: [UsuariosService]
 })
 export class PerfilComponent implements OnInit {
 
-  usuario: Usuario
+  usuario: Usuario;
+  errors = [];
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   ngOnInit() {
-    this.usuario = this.usuariosService.usuarioTest
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+
+    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
+      data => this.usuario = data,
+      error => {
+        console.log("error", error)
+        this.errors.push(error._body)
+      }
+    )
   }
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Invitacion } from 'src/model/domain/evento/invitacion';
 import { InvitacionesService } from 'src/app/services/invitaciones.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Usuario } from 'src/model/domain/usuario/usuario';
 
 @Component({
@@ -17,7 +16,7 @@ export class InvitacionesPendientesComponent implements OnInit {
   constructor(private invitacionesService: InvitacionesService) { }
 
   ngOnInit() {
-    this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes.filter(invitacion => invitacion.estaPendiente)
+    // this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes.filter(invitacion => invitacion.estaPendiente)
   }
 
   confirmarInvitacion(invitacion: Invitacion) {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/model/domain/usuario/usuario';
-import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-amigosMiPerfil',
@@ -12,11 +11,11 @@ export class AmigosMiPerfilComponent implements OnInit {
   amigos: Array<Usuario>
   usuario: Usuario
   
-  constructor(private usuarioService: UsuariosService) { }
+  constructor(/*private usuarioService: StubUsuariosService*/) { }
 
   ngOnInit() {
-    this.usuario = this.usuarioService.usuarioTest
-    this.amigos = this.usuario.amigos
+    // this.usuario = this.usuarioService.usuarioTest
+    // this.amigos = this.usuario.amigos
   }
 
   eliminarAmigo(amigo: Usuario){

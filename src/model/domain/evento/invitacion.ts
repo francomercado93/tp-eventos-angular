@@ -16,15 +16,15 @@ export class Invitacion {
         this.estaPendiente = true
         // this.evento.agregarAsistente(this.invitado)
     }
-    agregarListaAsistentesEventoCerrado() {
-        console.log(this.invitado.nombre)
-        this.evento.agregarAsistente(this.invitado)
-    }
+    // agregarListaAsistentesEventoCerrado() {
+    //     console.log(this.invitado.nombre)
+    //     this.evento.agregarAsistente(this.invitado)
+    // }
 
     confirmar(cantidadAcompaniantesInvitado: number): void {
 
         if (cantidadAcompaniantesInvitado <= this.cantidadAcompaniantesMaxima) {
-            this.evento.confirmarUsuario(this.invitado)
+            // this.evento.confirmarUsuario(this.invitado)
             this.estaPendiente = false
         }
         else

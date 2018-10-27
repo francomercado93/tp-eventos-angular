@@ -17,6 +17,7 @@ import { MisEventosModule } from './single/mis-eventos/mis-eventos.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule} from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 
 
@@ -41,6 +42,7 @@ import { CommonModule } from '@angular/common';
         BrowserAnimationsModule,
         MisEventosModule,
         PerfilModule,
+        HttpModule,
         AppRoutingModule,
 
     ],
