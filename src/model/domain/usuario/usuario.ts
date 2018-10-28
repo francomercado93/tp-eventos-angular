@@ -8,30 +8,21 @@ import { fechaHoy } from "src/app/services/eventos.service";
 
 export class Usuario {
 
-    // nombre: string
-    // id: number
-    // apellido: string
-    // username: string
-    // email: string
     amigos: Array<Usuario> = []
     invitaciones: Array<Invitacion> = []
     entradasCompradas: Array<Entrada> = []
     fechaHoraActual: Date;
-    // tipoUsuario: TipoUsuario;
     eventosOrganizados: Array<Evento> = []
 
-
-    constructor(public id?: number, private nombre?: string, private apellido?: string, private nombreUsuario?: string, private mail?: string/*, public tipoUsuario?: String*/) {
+    constructor(public id?: number, private nombre?: string, private apellido?: string, private nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario) {
         this.fechaHoraActual = fechaHoy()
-        // this.tipoUsuario = tipoUsuario
     }
 
-    // constructor(private apellido?: string) {
-    //     // this.id = id
-    //     this.fechaHoraActual = fechaHoy()
-    //     // this.nombre = name
-    //     // this.tipoUsuario = tipoUsuario
-    // }
+    agregarAmigos(amigosActualizados: Usuario[]) {
+        // console.log("hola")
+        // this.amigos = amigosActualizados
+        amigosActualizados.forEach(amigo => this.amigos.push(amigo))
+    }
 
     toJSON(): any {
         const result: any = Object.assign({}, this)
@@ -39,10 +30,17 @@ export class Usuario {
     }
 
     static fromJson(usuarioJson) {
-        // return new Usuario(usuarioJson.apellido)
         const result: Usuario = Object.assign(new Usuario(), usuarioJson) //verificar
-        //obtner amigos
+        this.asignarTipoUsuario(usuarioJson, result)
         return result
+    }
+    static asignarTipoUsuario(usuarioJson, result) {
+        if (usuarioJson.tipoUsuario == "Free")
+            result.tipoUsuario = new Free()
+        if (usuarioJson.tipoUsuario == "Amateur")
+            result.tipoUsuario = new Amateur()
+        if (usuarioJson.tipoUsuario == "Profesional")
+            result.tipoUsuario = new Profesional()
     }
 
     // recibirInvitacion(unaInvitacion: Invitacion) {
@@ -50,8 +48,10 @@ export class Usuario {
     //     unaInvitacion.agregarListaAsistentesEventoCerrado
     // }
     get cantidadAmigos() {
+        // return 5
         return this.amigos.length
     }
+
     eliminarAmigo(amigo: Usuario) {
         this.amigos.splice(this.amigos.indexOf(amigo), 1)
     }

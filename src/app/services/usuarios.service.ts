@@ -6,9 +6,9 @@ import { REST_SERVER_URL } from '../configuration';
 import { Observable } from 'rxjs';
 
 export interface IUsuarioService {
-  // todasLasTareas(): Observable<any>
+  // getAmigosUsuarioById(id: number): Observable<any>
   getUsuarioById(id: number): Observable<Usuario>
-  // actualizarTarea(id: number): void
+  actualizarUsuario(usuario: Usuario, amigo: Usuario): void
 }
 
 @Injectable({
@@ -22,21 +22,21 @@ export class UsuariosService implements IUsuarioService {
     return this.http.get(REST_SERVER_URL + "/usuarios/" + id).pipe(map(res => this.usuarioAsJson(res.json())))
   }
 
-  // getAmigosUsuarioById(id: number) {
-  //   return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/amigos/").pipe(map(this.convertToUsuarios))
-  // }
-
-  // convertToUsuarios(res: Response) {
-  //   return res.json().map(usuarioJson => Usuario.fromJson(usuarioJson))
-  // }
+  getAmigosUsuarioById(id: number) {
+    return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/amigos").toPromise()//.pipe(map(this.convertToUsuarios))
+  }
+ 
+  convertToUsuarios(res: Response) {
+    return res.json().map(usuarioJson => Usuario.fromJson(usuarioJson))
+  }
 
   private usuarioAsJson(usuarioJson): Usuario {
     return Usuario.fromJson(usuarioJson)
   }
 
-  // actualizarTarea(usuario: Usuario) {
-  //   this.http.put(REST_SERVER_URL + "/usuarios/" + usuario.id, usuario.toJSON()).subscribe()
-  // }
+  actualizarUsuario(usuario: Usuario, amigo: Usuario) {
+    this.http.put(REST_SERVER_URL + "/usuarios/" + usuario.id + "/amigos/" + amigo.id, usuario.toJSON()).subscribe()
+  }
 
 }
 

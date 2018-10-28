@@ -8,9 +8,9 @@
     <th>Eliminar</th>
 
   </tr>
-  <tr *ngFor="let amigo of amigos">
+  <tr *ngFor="let amigo of usuario?.amigos">
     <td>{{amigo.nombre}} {{amigo.apellido}}</td>
-    <td>{{amigo.username}}</td>
+    <td>{{amigo.nombreUsuario}}</td>
     <td>
       <button color="warn" type="button" title="Eliminar amigo" class="btn btn-danger" (click)="eliminarAmigo(amigo)"
         aria-label="Eliminar">
