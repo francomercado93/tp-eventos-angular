@@ -3,8 +3,8 @@ import { Entrada } from "../evento/entrada";
 import { Evento } from "../evento/evento";
 import { EventoAbierto } from "../evento/EventoAbierto";
 import { EventoCerrado } from "../evento/eventoCerrado";
-import { fechaHoy } from "src/app/services/eventos.service";
 import { Testability } from "@angular/core";
+import { fechaHoy } from "src/services/eventos.service";
 
 
 export class Usuario {
@@ -12,11 +12,10 @@ export class Usuario {
     amigos: Array<Usuario> = []
     invitaciones: Array<Invitacion> = []
     entradasCompradas: Array<Entrada> = []
-    fechaHoraActual: Date;
     eventosOrganizados: Array<Evento> = []
 
-    constructor(public id?: number, private nombre?: string, private apellido?: string, private nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario) {
-        this.fechaHoraActual = fechaHoy()
+    constructor(public id?: number, private nombre?: string, private apellido?: string, public nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario, public fechaHoraActual?: Date) {
+        // this.fechaHoraActual = fechaHoy()
     }
 
     toJSON(): any {
@@ -27,6 +26,7 @@ export class Usuario {
     static fromJson(usuarioJson) {
         const result: Usuario = Object.assign(new Usuario(), usuarioJson) //verificar
         this.asignarTipoUsuario(usuarioJson, result)
+        result.fechaHoraActual = fechaHoy()
         return result
     }
 

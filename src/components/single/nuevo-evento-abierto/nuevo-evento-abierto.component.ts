@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoAbierto } from 'src/model/domain/evento/EventoAbierto';
 import { Router } from '@angular/router';
-import { LocacionesService } from 'src/app/services/locaciones.service';
-import { EventosService } from 'src/app/services/eventos.service';
+import { LocacionesService } from 'src/services/locaciones.service';
+import { EventosService } from 'src/services/eventos.service';
 
 @Component({
   selector: 'app-nuevoEventoAbierto',

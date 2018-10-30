@@ -17,11 +17,13 @@ import { SidenavEventosComponent } from '../sidenav-eventos/sidenav-eventos.comp
 import { AgendaComponent } from '../agenda/agenda.component';
 import { InvitacionesPendientesComponent } from '../InvitacionesPendientes/InvitacionesPendientes.component';
 import { OrganizadosPorMiModule } from '../OrganizadosPorMi/OrganizadosPorMi.module';
+import { NuevoEventoCerradoComponent } from '../nuevoEventoCerrado/nuevoEventoCerrado.component';
 
 @NgModule({
   declarations: [
     MisEventosComponent,
     NuevoEventoAbiertoComponent,
+    NuevoEventoCerradoComponent,
     SidenavEventosComponent,
     MisEventosComponent,
     AgendaComponent,

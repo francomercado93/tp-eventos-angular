@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { map } from 'rxjs/operators';
-import { REST_SERVER_URL } from '../configuration';
 import { Observable } from 'rxjs';
 import { Invitacion } from 'src/model/domain/evento/invitacion';
+import { REST_SERVER_URL } from 'src/app/configuration';
 
 @Injectable({
   providedIn: 'root'

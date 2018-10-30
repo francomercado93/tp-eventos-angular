@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { map } from 'rxjs/operators';
 import { Usuario } from 'src/model/domain/usuario/usuario';
-import { REST_SERVER_URL } from '../configuration';
 import { Observable } from 'rxjs';
+import { REST_SERVER_URL } from 'src/app/configuration';
 
 export interface IUsuarioService {
   // getAmigosUsuarioById(id: number): Observable<any>

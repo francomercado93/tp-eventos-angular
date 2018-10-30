@@ -18,6 +18,8 @@ export class Evento {
     }
 
     usuarioEstaATiempo(unUsuario: Usuario) {
+        console.log(unUsuario.fechaHoraActual)
+        console.log(this.fechaMaximaConfirmacion)
         return unUsuario.fechaHoraActual < (this.fechaMaximaConfirmacion)
     }
 

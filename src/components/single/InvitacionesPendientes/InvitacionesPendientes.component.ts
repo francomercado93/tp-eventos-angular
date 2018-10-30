@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Invitacion } from 'src/model/domain/evento/invitacion';
-import { InvitacionesService } from 'src/app/services/invitaciones.service';
 import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
+import { InvitacionesService } from 'src/services/invitaciones.service';
+import { fechaHoy } from 'src/services/eventos.service';
 
 @Component({
   selector: 'app-InvitacionesPendientes',
@@ -15,6 +16,7 @@ export class InvitacionesPendientesComponent implements OnInit {
   invitacionesPendientes: Array<Invitacion> = [];
   errorMessage: string;
   errors = [];
+  cantidadAcompaniantes: number
 
   constructor(private invitacionesService: InvitacionesService, private router: Router, ) { }
 
@@ -33,17 +35,14 @@ export class InvitacionesPendientesComponent implements OnInit {
   public confirmarInvitacion(invitacion: Invitacion) {
     try {
       this.errorMessage = ""
-      // invitacion.evento.confirmarUsuario(invitacion.invitado)
+      console.log(invitacion)
+      invitacion.confirmar(this.cantidadAcompaniantes)
     } catch (errorValidation) {
       this.errorMessage = errorValidation
     }
   }
   public rechazarInvitacion(invitacion: Invitacion) {
-    console.log(invitacion);
-    invitacion.evento.usuarioRechazaInvitacion(invitacion.invitado)
-    // this.invitacionesPendientes = this.invitacionesService.invitacionesPendientes //?
+    console.log(invitacion)
+    invitacion.rechazar()
   }
-  // estaPendiente(invitacion: Invitacion) {
-  //   invitacion.estaPendiente
-  // }
 }

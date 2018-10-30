@@ -12,10 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './components/share/toolbar/toolbar.component';
-import { MisEventosModule } from './components/single/mis-eventos/mis-eventos.module';
-import { PerfilModule } from './components/single/perfil/perfil.module';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ToolbarComponent } from 'src/components/share/toolbar/toolbar.component';
+import { MisEventosModule } from 'src/components/single/mis-eventos/mis-eventos.module';
+import { PerfilModule } from 'src/components/single/perfil/perfil.module';
 
 @NgModule({
     declarations: [

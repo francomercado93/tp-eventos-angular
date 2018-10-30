@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventosService } from 'src/app/services/eventos.service';
 import { Evento } from 'src/model/domain/evento/evento';
+import { EventosService } from 'src/services/eventos.service';
 
 @Component({
   selector: 'app-agenda',
@@ -14,9 +14,11 @@ export class AgendaComponent implements OnInit {
   eventosEstaSemana: Array<Evento> = []
   eventosProximos: Array<Evento> = []
   errors = [];
-
-  constructor(private eventoService: EventosService) {
+  constructor(){
+    
   }
+  // constructor(private eventoService: EventosService) {
+  // }
 
   ngOnInit(): void {
     // this.eventosHoy = this.eventoService.eventosHoy

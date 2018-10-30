@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
-import { EventosService } from 'src/app/services/eventos.service';
 import { Evento } from 'src/model/domain/evento/evento';
+import { EventosService } from 'src/services/eventos.service';
 
 @Component({
   selector: 'app-OrganizadosPorMi',
@@ -27,9 +27,12 @@ export class OrganizadosPorMiComponent implements OnInit {
     )
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
-  nuevoEventoAbierto(){
-    console.log("hois")
+  nuevoEventoAbierto() {
     this.router.navigate(['misEventos/nuevoEventoAbierto'])
+  }
+
+  nuevoEventoCerrado() {
+    this.router.navigate(['misEventos/nuevoEventoCerrado'])
   }
 }
 

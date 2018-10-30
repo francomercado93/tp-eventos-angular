@@ -1,8 +1,5 @@
-import { Evento } from '../../model/domain/evento/evento';
-import { EventoAbierto } from '../../model/domain/evento/EventoAbierto';
-import { EventoCerrado } from '../../model/domain/evento/eventoCerrado';
-import { Profesional, Usuario } from '../../model/domain/usuario/usuario';
 import { Injectable } from '@angular/core';
+import { Evento } from 'src/model/domain/evento/evento';
 
 @Injectable({
   providedIn: 'root'

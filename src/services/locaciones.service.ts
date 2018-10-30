@@ -1,7 +1,7 @@
-import { Injectable, } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { REST_SERVER_URL } from '../configuration';
 import { map } from 'rxjs/operators';
+import { REST_SERVER_URL } from 'src/app/configuration';
 import { Locacion } from 'src/model/domain/evento/Locacion';
 
 @Injectable({

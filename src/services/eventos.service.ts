@@ -3,7 +3,7 @@ import { Http, Response } from "@angular/http";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Evento } from 'src/model/domain/evento/evento';
-import { REST_SERVER_URL } from '../configuration';
+import { REST_SERVER_URL } from 'src/app/configuration';
 
 @Injectable({
   providedIn: 'root'
