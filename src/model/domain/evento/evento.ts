@@ -1,34 +1,34 @@
 import { Usuario } from "../usuario/usuario";
+import { Locacion } from "./Locacion";
 
 export class Evento {
-    nombreEvento: string
-    inicioEvento: Date
-    locacion: string
-    organizador: Usuario
-    fechaMaximaConfirmacion: Date
-    asistentes: Array<Usuario>
 
-    constructor(nombre, fechaInicio, lugar, organizadorEvento) {
-        this.nombreEvento = nombre;
-        this.inicioEvento = fechaInicio;
-        this.locacion = lugar;
-        this.organizador = organizadorEvento
+    constructor(public nombre?: String, public inicioEvento?: Date, public fechaMaximaConfirmacion?: Date, public finEvento?: Date, public locacion?: Locacion,
+        private organizadorEvento?: String, public asistentes?: Array<Usuario>, private rechazados?: number, private cantidadAsistentesPosibles?: number) {
+        this.inicioEvento = new Date()
+        this.finEvento = new Date()
+        this.fechaMaximaConfirmacion = new Date()
     }
-    verdad: boolean = true
-  
+
+    static fromJson(eventoJson) {
+        const result: Evento = Object.assign(new Evento(), eventoJson) 
+        result.locacion = Object.assign(new Locacion(), eventoJson.locacion) 
+        // result.locacion = eventoJson.fromJson(eventoJson.locacion)//No funciona
+        return result
+    }
+
     usuarioEstaATiempo(unUsuario: Usuario) {
         return unUsuario.fechaHoraActual < (this.fechaMaximaConfirmacion)
     }
-    
-    // removerUsuario(unUsuario: Usuario) { //no funciona
-    //     console.log('DATO:  '+ unUsuario.nombre)
-    //     console.log('DATO2:  '+ this.asistentes)
-    //     // this.asistentes.length()
-    //     // this.asistentes.splice(this.asistentes.indexOf(unUsuario), 1) 
-    // }
-    // cantidadDisponibles() { // Eventos abiertos => entradas, cerrados => invitaciones
-    //     (this.capacidadMaxima() - this.cantidadAsistentesPosibles)
-    // }
+
+    removerUsuario(unUsuario: Usuario): void {
+        this.asistentes.splice(this.asistentes.indexOf(unUsuario), 1)
+    }
+
+    cantidadDisponibles() { // Eventos abiertos => entradas, cerrados => invitaciones
+        return 5
+        // (this.capacidadMaxima() - this.cantidadAsistentesPosibles)
+    }
 
     // capacidadMaxima() {
     // 	locacion.calcularCapacidad(ESPACIONECESARIOPERSONA)

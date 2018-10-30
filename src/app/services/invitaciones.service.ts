@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from "@angular/http";
+import { map } from 'rxjs/operators';
+import { REST_SERVER_URL } from '../configuration';
+import { Observable } from 'rxjs';
+import { Invitacion } from 'src/model/domain/evento/invitacion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvitacionesService {
 
-  // invitacionesPendientes: Invitacion[]
+  constructor(private http: Http) { }
 
-  // constructor(private usuarioServiceTest: StubUsuariosService) {
-  // }
+  getInvitacionesUsuarioById(id: number): Observable<any> {
+    return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/invitaciones").pipe(map(this.convertToInvitaciones))
+  }
 
-  // get invitacionesPendientes() {
-  //   return this.usuarioServiceTest.usuarioTest.invitaciones
-  // } 
+  convertToInvitaciones(res: Response) {
+    return res.json().map(invJson => Invitacion.fromJson(invJson))
+  }
+
 }

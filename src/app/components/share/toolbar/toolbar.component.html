@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
-
   <mat-toolbar-row>
-    <mat-icon [routerLink]="['misEventos/agenda']">home</mat-icon>
+    <button mat-raised-button color="primary" [routerLink]="['/misEventos/agenda']">
+      <mat-icon>home</mat-icon>
+    </button>
     <span>Eventos OS</span>
     <span class="example-spacer"></span>
     <button mat-raised-button color="primary" [routerLink]="['misEventos/agenda']">Mis eventos</button>

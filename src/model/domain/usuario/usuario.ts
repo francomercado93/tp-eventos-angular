@@ -4,6 +4,7 @@ import { Evento } from "../evento/evento";
 import { EventoAbierto } from "../evento/EventoAbierto";
 import { EventoCerrado } from "../evento/eventoCerrado";
 import { fechaHoy } from "src/app/services/eventos.service";
+import { Testability } from "@angular/core";
 
 
 export class Usuario {
@@ -18,12 +19,6 @@ export class Usuario {
         this.fechaHoraActual = fechaHoy()
     }
 
-    agregarAmigos(amigosActualizados: Usuario[]) {
-        // console.log("hola")
-        // this.amigos = amigosActualizados
-        amigosActualizados.forEach(amigo => this.amigos.push(amigo))
-    }
-
     toJSON(): any {
         const result: any = Object.assign({}, this)
         return result
@@ -34,6 +29,8 @@ export class Usuario {
         this.asignarTipoUsuario(usuarioJson, result)
         return result
     }
+
+
     static asignarTipoUsuario(usuarioJson, result) {
         if (usuarioJson.tipoUsuario == "Free")
             result.tipoUsuario = new Free()
@@ -48,7 +45,6 @@ export class Usuario {
     //     unaInvitacion.agregarListaAsistentesEventoCerrado
     // }
     get cantidadAmigos() {
-        // return 5
         return this.amigos.length
     }
 

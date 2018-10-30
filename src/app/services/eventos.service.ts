@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from "@angular/http";
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Evento } from 'src/model/domain/evento/evento';
-import { EVENTOS } from 'src/model/domain/juegoDatos/eventosStub';
-
+import { REST_SERVER_URL } from '../configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -9,37 +11,57 @@ import { EVENTOS } from 'src/model/domain/juegoDatos/eventosStub';
 
 export class EventosService {
 
-  eventos: Evento[];
-  hoy: Date;
+  constructor(private http: Http) { }
 
-  constructor() {
-    this.eventos = EVENTOS
-    
+  getEventosOrganizadosUsuarioById(id: number): Observable<any> {
+    return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/organizadosPorMi").pipe(map(this.convertToEventos))
   }
 
-  get eventosHoy() {
-    return this.eventos.filter(evento => evento.inicioEvento.getDate() == fechaHoy().getDate())
+  convertToEventos(res: Response) {
+    return res.json().map(eventoJson => Evento.fromJson(eventoJson))
   }
 
-  get eventosEstaSemana() {//revisar
-    return this.eventos.filter(evento =>
-      ((fechaHoy().getTime() - evento.inicioEvento.getTime() >= -432000000
-      && fechaHoy().getTime() - evento.inicioEvento.getTime() <= 0 )||
-      (fechaHoy().getTime() - evento.inicioEvento.getTime() <= 432000000 &&
-      fechaHoy().getTime() - evento.inicioEvento.getTime() >= 0))
-    )
-  }
-
-  get eventosProximos() {
-    return this.eventos.filter(evento =>
-      evento.inicioEvento.getTime() >= fechaHoy().getTime() + 432000000)
-  }
-
-  // get fechaHoy() {
-  //   return new Date(2018, 6, 5)
-  // }
 }
 
-export function fechaHoy(){
+
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+
+// export class StubEventosService {
+
+//   eventos: Evento[];
+//   hoy: Date;
+
+//   constructor() {
+//     this.eventos = EVENTOS
+
+//   }
+
+//   get eventosHoy() {
+//     return this.eventos.filter(evento => evento.inicioEvento.getDate() == fechaHoy().getDate())
+//   }
+
+//   get eventosEstaSemana() {//revisar
+//     return this.eventos.filter(evento =>
+//       ((fechaHoy().getTime() - evento.inicioEvento.getTime() >= -432000000
+//         && fechaHoy().getTime() - evento.inicioEvento.getTime() <= 0) ||
+//         (fechaHoy().getTime() - evento.inicioEvento.getTime() <= 432000000 &&
+//           fechaHoy().getTime() - evento.inicioEvento.getTime() >= 0))
+//     )
+//   }
+
+//   get eventosProximos() {
+//     return this.eventos.filter(evento =>
+//       evento.inicioEvento.getTime() >= fechaHoy().getTime() + 432000000)
+//   }
+
+//   // get fechaHoy() {
+//   //   return new Date(2018, 6, 5)
+//   // }
+// }
+
+export function fechaHoy() {
   return new Date(2018, 6, 5)
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/model/domain/usuario/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 
 @Component({
@@ -18,15 +18,14 @@ export class PerfilComponent implements OnInit {
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
-
-    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
-      data => this.usuario = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-  }
+      this.usuariosService.getUsuarioById(USRTESTID).subscribe(
+        data => this.usuario = data,
+        error => {
+          console.log("error", error)
+          this.errors.push(error._body)
+        }
+      )
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    }
 
 }

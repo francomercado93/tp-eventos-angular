@@ -1,37 +1,37 @@
 import { Evento } from "./evento";
 import { Usuario } from "../usuario/usuario";
+import { supportsWebAnimations } from "@angular/animations/browser/src/render/web_animations/web_animations_driver";
 
 export class EventoCerrado extends Evento {
 
-    agregarAsistente(invitado: Usuario) {
-        this.asistentes.push(invitado)      //agrega a la lista de asistentes posibles
-        console.log('AGREGARaSISTENTE:  '+ this.asistentes)
-    }
-
     invitadosConfirmados: Array<Usuario> = []
 
-    constructor(nombre, fechaInicio, lugar, organizadorEvento, fechaMaximaConfirmacion) {
-        super(nombre, fechaInicio, lugar, organizadorEvento);
-        this.fechaMaximaConfirmacion = fechaMaximaConfirmacion
+    constructor(private capacidadMaxima?: number, private cantidadAsistentesConfirmados?: number) {
+        super()
     }
 
-    // usuarioRechazaInvitacion(invitado: Usuario) {
-    //     this.removerUsuario(invitado)
-    // }
+    agregarAsistente(invitado: Usuario) {
+        this.asistentes.push(invitado)      //agrega a la lista de asistentes posibles
+    }
+
+    usuarioRechazaInvitacion(invitado: Usuario): void {
+        this.removerUsuario(invitado)
+    }
+
     cumpleCondiciones(invitado: Usuario) {
         return super.usuarioEstaATiempo(invitado)
     }
 
-    // confirmarUsuario(invitado: Usuario): void {
-    //     if (this.cumpleCondiciones(invitado)) {
-    //         this.agregarListaConfirmado(invitado)
-    //     } else
-    //         throw ("Usuario paso la fecha maxima de confirmacion ")
-    // }
-    // agregarListaConfirmado(unUsuario: Usuario) {
+    confirmarUsuario(invitado: Usuario) {
+        if (this.cumpleCondiciones(invitado)) {
+            this.agregarListaConfirmado(invitado)
+        }
+        throw ("Usuario paso la fecha maxima de confirmacion ")
+    }
 
-    //     console.log('DATO3:  ' + this.asistentes)
-    //     this.invitadosConfirmados.push(unUsuario)
-    //     super.removerUsuario(unUsuario)
-    // }
+
+    agregarListaConfirmado(unUsuario: Usuario) {
+        this.invitadosConfirmados.push(unUsuario)
+        super.removerUsuario(unUsuario)
+    }
 }
