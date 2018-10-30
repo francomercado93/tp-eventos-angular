@@ -3,6 +3,8 @@ import { EventoAbierto } from 'src/model/domain/evento/EventoAbierto';
 import { Router } from '@angular/router';
 import { LocacionesService } from 'src/services/locaciones.service';
 import { EventosService } from 'src/services/eventos.service';
+import { USRTESTID } from 'src/app/configuration';
+import { Evento } from 'src/model/domain/evento/evento';
 
 @Component({
   selector: 'app-nuevoEventoAbierto',
@@ -11,7 +13,7 @@ import { EventosService } from 'src/services/eventos.service';
 })
 export class NuevoEventoAbiertoComponent implements OnInit {
 
-  evento = new EventoAbierto()
+  evento: Evento
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
@@ -22,6 +24,7 @@ export class NuevoEventoAbiertoComponent implements OnInit {
   constructor(private locacionesService: LocacionesService, private eventosService: EventosService, private router: Router) { }
 
   ngOnInit() {
+    this.evento = new EventoAbierto()
     const ayer = new Date()
     ayer.setDate(ayer.getDate() - 1)
     this.opcionesFecha = {
@@ -41,7 +44,7 @@ export class NuevoEventoAbiertoComponent implements OnInit {
     this.fechaMaximaConfirmacion = {
       date: this.convertirANuevoDate(fechaMaximaConfirmacionEvento)
     }
-    
+
     this.locacionesService.getLocaciones().subscribe(
       data => this.locacionesPosibles = data,
       error => {
@@ -51,6 +54,7 @@ export class NuevoEventoAbiertoComponent implements OnInit {
     )
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
+
   convertirANuevoDate(fecha: Date) {
     return {
       year: fecha.getFullYear(),
@@ -68,6 +72,8 @@ export class NuevoEventoAbiertoComponent implements OnInit {
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
   aceptar() {
+    console.log(this.evento)
+    this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
 }

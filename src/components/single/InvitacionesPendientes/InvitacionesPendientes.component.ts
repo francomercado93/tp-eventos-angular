@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { InvitacionesService } from 'src/services/invitaciones.service';
 import { fechaHoy } from 'src/services/eventos.service';
+import { EventoCerrado } from 'src/model/domain/evento/eventoCerrado';
 
 @Component({
   selector: 'app-InvitacionesPendientes',
@@ -17,6 +18,7 @@ export class InvitacionesPendientesComponent implements OnInit {
   errorMessage: string;
   errors = [];
   cantidadAcompaniantes: number
+  eventoInvitacion: EventoCerrado
 
   constructor(private invitacionesService: InvitacionesService, private router: Router, ) { }
 
@@ -35,7 +37,7 @@ export class InvitacionesPendientesComponent implements OnInit {
   public confirmarInvitacion(invitacion: Invitacion) {
     try {
       this.errorMessage = ""
-      console.log(invitacion)
+      // console.log(invitacion)
       invitacion.confirmar(this.cantidadAcompaniantes)
     } catch (errorValidation) {
       this.errorMessage = errorValidation
@@ -44,5 +46,6 @@ export class InvitacionesPendientesComponent implements OnInit {
   public rechazarInvitacion(invitacion: Invitacion) {
     console.log(invitacion)
     invitacion.rechazar()
+    this.invitacionesService.actualizarInvitacion(invitacion)
   }
 }

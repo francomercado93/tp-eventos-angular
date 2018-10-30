@@ -1,13 +1,19 @@
 import { Evento } from "./evento";
 import { Usuario } from "../usuario/usuario";
 import { supportsWebAnimations } from "@angular/animations/browser/src/render/web_animations/web_animations_driver";
+import { Locacion } from "./Locacion";
 
 export class EventoCerrado extends Evento {
 
     invitadosConfirmados: Array<Usuario> = []
-
-    constructor(private capacidadMaxima?: number, private cantidadAsistentesConfirmados?: number) {
-        super()
+    // private capacidadMaxima?: number, private cantidadAsistentesConfirmados?: NUMBER
+    constructor(public nombreEvento?: String, public inicioEvento?: Date, public fechaMaximaConfirmacion?: Date, public finEvento?: Date, public locacion?: Locacion,
+        public organizadorEvento?: Usuario, public asistentes?: Array<Usuario>, public rechazados?: number, public cantidadAsistentesPosibles?: number) {
+        super(nombreEvento, inicioEvento, fechaMaximaConfirmacion, finEvento, locacion,
+            organizadorEvento, asistentes, rechazados, cantidadAsistentesPosibles)
+        this.inicioEvento = new Date()
+        this.finEvento = new Date()
+        this.fechaMaximaConfirmacion = new Date()
     }
 
     agregarAsistente(invitado: Usuario) {
@@ -15,6 +21,7 @@ export class EventoCerrado extends Evento {
     }
 
     usuarioRechazaInvitacion(invitado: Usuario): void {
+        // this.asistentes.splice(this.asistentes.indexOf(invitado), 1)
         this.removerUsuario(invitado)
     }
 

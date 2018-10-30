@@ -16,6 +16,14 @@ export class InvitacionesService {
     return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/invitaciones").pipe(map(this.convertToInvitaciones))
   }
 
+  actualizarInvitacion(invitacion: Invitacion) {
+    console.log(invitacion.invitado)
+    console.log(invitacion.evento)
+    console.log(invitacion.estaConfirmado)
+    console.log(invitacion.estaRechazado)
+    return this.http.put(REST_SERVER_URL + "/usuarios/" + invitacion.invitado.id + "/invitacion", invitacion.toJSON()).subscribe()
+  }
+
   convertToInvitaciones(res: Response) {
     return res.json().map(invJson => Invitacion.fromJson(invJson))
   }

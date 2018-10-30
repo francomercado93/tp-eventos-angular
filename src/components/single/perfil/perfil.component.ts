@@ -18,14 +18,14 @@ export class PerfilComponent implements OnInit {
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   ngOnInit() {
-      this.usuariosService.getUsuarioById(USRTESTID).subscribe(
-        data => this.usuario = data,
-        error => {
-          console.log("error", error)
-          this.errors.push(error._body)
-        }
-      )
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
+      data => this.usuario = data,
+      error => {
+        console.log("error", error)
+        this.errors.push(error._body)
+      }
+    )
+  }
 
 }

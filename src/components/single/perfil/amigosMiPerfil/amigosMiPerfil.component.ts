@@ -11,7 +11,7 @@ import { UsuariosService } from 'src/services/usuarios.service';
 })
 export class AmigosMiPerfilComponent implements OnInit {
 
-  amigos: Array<Usuario>
+  // amigos: Array<Usuario>
   usuario: Usuario
   errors = []
 

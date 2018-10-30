@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { EventoCerrado } from 'src/model/domain/evento/eventoCerrado';
 import { LocacionesService } from 'src/services/locaciones.service';
 import { EventosService } from 'src/services/eventos.service';
+import { USRTESTID } from 'src/app/configuration';
+import { Usuario } from 'src/model/domain/usuario/usuario';
+import { UsuariosService } from 'src/services/usuarios.service';
+import { Evento } from 'src/model/domain/evento/evento';
 
 @Component({
   selector: 'app-nuevoEventoCerrado',
@@ -13,17 +17,28 @@ import { EventosService } from 'src/services/eventos.service';
 
 export class NuevoEventoCerradoComponent implements OnInit {
 
-  evento = new EventoCerrado()
+  evento:EventoCerrado
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
   opcionesFecha: {}
   locacionesPosibles = []
   errors = [];
+  usuario: Usuario
 
-  constructor(private locacionesService: LocacionesService, private eventosService: EventosService, private router: Router) { }
+  constructor(private locacionesService: LocacionesService, private eventosService: EventosService,
+    private router: Router, private usuariosService: UsuariosService) { }
 
   ngOnInit() {
+    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
+      data => this.usuario = data,
+      error => {
+        console.log("error", error)
+        this.errors.push(error._body)
+      }
+    )
+    this.evento = new EventoCerrado()
+    
     const ayer = new Date()
     ayer.setDate(ayer.getDate() - 1)
     this.opcionesFecha = {
@@ -70,6 +85,14 @@ export class NuevoEventoCerradoComponent implements OnInit {
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
   aceptar() {
+    console.log(this.evento)
+    this.evento.organizadorEvento = this.usuario
+    this.evento.rechazados = 0
+    this.evento.cantidadAsistentesPosibles = 0
+
+    // this.usuario.crearEvento(this.evento)
+    this.usuario.eventosOrganizados.forEach(evento => console.log(evento.nombreEvento))
+    this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
 }

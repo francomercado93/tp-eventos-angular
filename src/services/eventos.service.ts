@@ -10,6 +10,10 @@ import { REST_SERVER_URL } from 'src/app/configuration';
 })
 
 export class EventosService {
+  
+  actualizarEventosOrganizadosUsuario(id: number, evento: Evento) {
+    this.http.put(REST_SERVER_URL + "/usuarios/" + id + "/nuevoEvento/", evento.toJSON()).subscribe()
+  }
 
   constructor(private http: Http) { }
 
