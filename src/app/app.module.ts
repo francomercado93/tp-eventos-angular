@@ -16,6 +16,7 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ToolbarComponent } from 'src/components/share/toolbar/toolbar.component';
 import { MisEventosModule } from 'src/components/single/mis-eventos/mis-eventos.module';
 import { PerfilModule } from 'src/components/single/perfil/perfil.module';
+import { AgendaModule } from 'src/components/single/agenda/agenda.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { PerfilModule } from 'src/components/single/perfil/perfil.module';
     ],
     imports: [
         CommonModule,
+        // AgendaModule,
         MatInputModule,
         MatFormFieldModule,
         BrowserModule,

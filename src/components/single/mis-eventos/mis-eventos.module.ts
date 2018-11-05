@@ -18,6 +18,7 @@ import { AgendaComponent } from '../agenda/agenda.component';
 import { InvitacionesPendientesComponent } from '../InvitacionesPendientes/InvitacionesPendientes.component';
 import { OrganizadosPorMiModule } from '../OrganizadosPorMi/OrganizadosPorMi.module';
 import { NuevoEventoCerradoComponent } from '../nuevoEventoCerrado/nuevoEventoCerrado.component';
+import { AgendaModule } from '../agenda/agenda.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { NuevoEventoCerradoComponent } from '../nuevoEventoCerrado/nuevoEventoCe
     NuevoEventoCerradoComponent,
     SidenavEventosComponent,
     MisEventosComponent,
-    AgendaComponent,
+    // AgendaComponent,
     InvitacionesPendientesComponent,
   ],
   imports: [
@@ -43,8 +44,9 @@ import { NuevoEventoCerradoComponent } from '../nuevoEventoCerrado/nuevoEventoCe
     MatIconModule,
     MatButtonModule,
     MatGridListModule,
+    AgendaModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
   ],
 })
 export class MisEventosModule { }

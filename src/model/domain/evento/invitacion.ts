@@ -29,7 +29,7 @@ export class Invitacion {
 
     rechazar() {
         this.estaRechazado = true
-        this.evento.usuarioRechazaInvitacion(this.invitado)
+        // this.evento.usuarioRechazaInvitacion(this.invitado)
     }
 
 }

@@ -1,28 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { Http } from "@angular/http";
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Evento } from 'src/model/domain/evento/evento';
-import { REST_SERVER_URL } from 'src/app/configuration';
+import { REST_SERVER_URL, USRTESTID } from 'src/app/configuration';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class EventosService {
-  
-  actualizarEventosOrganizadosUsuario(id: number, evento: Evento) {
-    this.http.put(REST_SERVER_URL + "/usuarios/" + id + "/nuevoEvento/", evento.toJSON()).subscribe()
-  }
+  agenda: Array<Evento> = []
+
 
   constructor(private http: Http) { }
 
-  getEventosOrganizadosUsuarioById(id: number): Observable<any> {
-    return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/organizadosPorMi").pipe(map(this.convertToEventos))
+  async getAgendaUsuarioById(id: number): Promise<any> {
+    const res = await this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/agenda").toPromise()
+    return res.json().map(Evento.fromJson)
+  }
+  // async obtenerEventosHoy() {
+  //   this.agenda = await this.getAgendaUsuarioById(USRTESTID)
+  //   return this.agenda.filter[evento => evento.inicioEvento.getFullYear() == new Date(2018, 6, 5).getFullYear()]
+  // }
+
+  async actualizarEventosOrganizadosUsuario(id: number, evento: Evento) {
+    return this.http.put(REST_SERVER_URL + "/usuarios/" + id + "/nuevoeventoabierto", evento.toJSON()).toPromise()
   }
 
-  convertToEventos(res: Response) {
-    return res.json().map(eventoJson => Evento.fromJson(eventoJson))
+  async getEventosOrganizadosUsuarioById(id: number): Promise<any> {
+    const res = await this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/organizadosPorMi").toPromise()
+    return res.json().map(Evento.fromJson)
   }
 
 }
@@ -67,5 +75,5 @@ export class EventosService {
 // }
 
 export function fechaHoy() {
-  return new Date(2018, 6, 5)
+  return new Date(2018, 5, 5, 12, 35)
 }

@@ -4,6 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { UsuariosService } from 'src/services/usuarios.service';
 
+export function mostrarError(component, error) {
+  console.log("error", error)
+  component.errors.push(error._body)
+}
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -17,15 +22,12 @@ export class PerfilComponent implements OnInit {
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
-  ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
-      data => this.usuario = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
+  async ngOnInit() {
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
+    } catch (error) {
+      mostrarError(this, error)
+    }
   }
-
 }

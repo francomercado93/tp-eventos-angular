@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
-import { map } from 'rxjs/operators';
-import { Usuario } from 'src/model/domain/usuario/usuario';
-import { Observable } from 'rxjs';
+import { Http } from "@angular/http";
 import { REST_SERVER_URL } from 'src/app/configuration';
+import { Usuario } from 'src/model/domain/usuario/usuario';
 
 export interface IUsuarioService {
-  // getAmigosUsuarioById(id: number): Observable<any>
-  getUsuarioById(id: number): Observable<Usuario>
+  getAmigosUsuarioById(id: number): Promise<any>
+  getUsuarioById(id: number): Promise<Usuario>
   actualizarUsuario(usuario: Usuario, amigo: Usuario): void
 }
 
@@ -18,24 +16,18 @@ export interface IUsuarioService {
 export class UsuariosService implements IUsuarioService {
   constructor(private http: Http) { }
 
-  getUsuarioById(id: number) {
-    return this.http.get(REST_SERVER_URL + "/usuarios/" + id).pipe(map(res => this.usuarioAsJson(res.json())))
+  async getUsuarioById(id: number) {
+    const res = await this.http.get(REST_SERVER_URL + "/usuarios/" + id).toPromise()
+    return Usuario.fromJson(res.json())
   }
 
-  getAmigosUsuarioById(id: number) {
-    return this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/amigos").toPromise()//.pipe(map(this.convertToUsuarios))
-  }
- 
-  convertToUsuarios(res: Response) {
-    return res.json().map(usuarioJson => Usuario.fromJson(usuarioJson))
+  async getAmigosUsuarioById(id: number) {
+    const res = await this.http.get(REST_SERVER_URL + "/usuarios/" + id + "/amigos").toPromise()
+    return res.json().map(Usuario.fromJson)
   }
 
-  private usuarioAsJson(usuarioJson): Usuario {
-    return Usuario.fromJson(usuarioJson)
-  }
-
-  actualizarUsuario(usuario: Usuario, amigo: Usuario) {
-    this.http.put(REST_SERVER_URL + "/usuarios/" + usuario.id + "/amigos/" + amigo.id, usuario.toJSON()).subscribe()
+  async actualizarUsuario(usuario: Usuario, amigo: Usuario) {
+    return this.http.put(REST_SERVER_URL + "/usuarios/" + usuario.id + "/amigos/" + amigo.id, usuario.toJSON()).toPromise()
   }
 
 }

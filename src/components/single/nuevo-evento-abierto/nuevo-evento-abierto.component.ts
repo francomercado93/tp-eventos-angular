@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { EventoAbierto } from 'src/model/domain/evento/EventoAbierto';
 import { Router } from '@angular/router';
 import { LocacionesService } from 'src/services/locaciones.service';
-import { EventosService } from 'src/services/eventos.service';
+import { EventosService, fechaHoy } from 'src/services/eventos.service';
 import { USRTESTID } from 'src/app/configuration';
 import { Evento } from 'src/model/domain/evento/evento';
+import { UsuariosService } from 'src/services/usuarios.service';
+import { Usuario } from 'src/model/domain/usuario/usuario';
+import { mostrarError } from '../perfil/perfil.component';
+import { Time } from '@angular/common';
+import { MatDatepickerToggle } from '@angular/material';
 
 @Component({
   selector: 'app-nuevoEventoAbierto',
@@ -13,67 +18,100 @@ import { Evento } from 'src/model/domain/evento/evento';
 })
 export class NuevoEventoAbiertoComponent implements OnInit {
 
-  evento: Evento
+  evento: Evento = new Evento()
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
-  opcionesFecha: {}
   locacionesPosibles = []
-  errors = [];
+  errors = []
+  usuario: Usuario
+  opcionesFecha: {}
 
-  constructor(private locacionesService: LocacionesService, private eventosService: EventosService, private router: Router) { }
+  constructor(private locacionesService: LocacionesService, private usuariosService: UsuariosService, private eventosService: EventosService, private router: Router) { }
 
-  ngOnInit() {
-    this.evento = new EventoAbierto()
-    const ayer = new Date()
+  async ngOnInit() {
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
+    } catch (error) {
+      mostrarError(this, error)
+    }
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.usuario.eventosOrganizados = await this.eventosService.getEventosOrganizadosUsuarioById(USRTESTID)
+    } catch (error) {
+      mostrarError(this, error)
+    }
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.locacionesPosibles = await this.locacionesService.getLocaciones()
+    } catch (error) {
+      mostrarError(this, error)
+    }
+    // this.evento.initialize(this.usuario)
+    this.initialize()
+  }
+
+  private initialize() {
+
+    const ayer = fechaHoy() //
     ayer.setDate(ayer.getDate() - 1)
+    // const iniEvento = this.evento.inicioEvento
+    this.inicioModel = {
+      date: this.convertirANuevoDate(fechaHoy())
+    }
+    // const finEvento = this.evento.finEvento;
+    this.finEventoModel = {
+      date: this.convertirANuevoDate(fechaHoy())
+    }
+    // const fechaMaximaConfirmacionEvento = this.evento.fechaMaximaConfirmacion;
+    this.fechaMaximaConfirmacion = {
+      date: this.convertirANuevoDate(fechaHoy())
+    };
     this.opcionesFecha = {
       dateFormat: 'dd/mm/yyyy', disableUntil: this.convertirANuevoDate(ayer)
     }
-
-    const iniEvento = this.evento.inicioEvento
-    this.inicioModel = {
-      date: this.convertirANuevoDate(iniEvento)
-    }
-
-    const finEvento = this.evento.finEvento
-    this.finEventoModel = {
-      date: this.convertirANuevoDate(finEvento)
-    }
-    const fechaMaximaConfirmacionEvento = this.evento.fechaMaximaConfirmacion
-    this.fechaMaximaConfirmacion = {
-      date: this.convertirANuevoDate(fechaMaximaConfirmacionEvento)
-    }
-
-    this.locacionesService.getLocaciones().subscribe(
-      data => this.locacionesPosibles = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
 
   convertirANuevoDate(fecha: Date) {
     return {
       year: fecha.getFullYear(),
       month: fecha.getMonth() + 1,
-      day: fecha.getDate()
+      day: fecha.getDate(),
+      hour: fecha.getHours(),
+      minute: fecha.getMinutes()
     }
   }
-
   convertirADate(fecha: any): Date {
     if (!fecha) return null
-    return new Date(fecha.year, fecha.month - 1, fecha.day)
+    return new Date(fecha.date.year, fecha.date.month - 1, fecha.date.day, fecha.date.hour, fecha.date.minute)
   }
-
   cancelar() {
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
+
   aceptar() {
-    console.log(this.evento)
-    this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
-    this.router.navigate(['misEventos/organizadosPorMi'])
+    try {
+      this.errors = []
+      // this.evento.inicioEvento = this.convertirADate(this.inicioModel)
+      // this.evento.fechaMaximaConfirmacion = this.convertirADate(this.fechaMaximaConfirmacion)
+      // this.evento.finEvento = this.convertirADate(this.finEventoModel)
+      console.log(this.inicioModel)
+      console.log(this.fechaMaximaConfirmacion)
+      console.log(this.finEventoModel)
+      // console.log(this.evento.inicioEvento)
+      // console.log(this.evento.finEvento)
+      // console.log(this.evento.fechaMaximaConfirmacion)
+      this.evento.validarFechas()
+      this.usuario.puedoCrearEvento(this.evento)
+      this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
+      // this.router.navigate(['misEventos/organizadosPorMi'])
+    } catch (e) {
+      this.errors.push(e)
+    }
   }
+
+  // validarFechas(){
+  //   return this.convertirADate(this.finEventoModel).getTime() > this.convertirADate(this.inicioModel).getTime()
+  // }
 }

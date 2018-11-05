@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { REST_SERVER_URL } from 'src/app/configuration';
 import { Locacion } from 'src/model/domain/evento/Locacion';
@@ -10,10 +10,9 @@ import { Locacion } from 'src/model/domain/evento/Locacion';
 export class LocacionesService {
 
   constructor(private http: Http) { }
-  getLocaciones() {
-    return this.http.get(REST_SERVER_URL + "/locaciones").pipe(map(this.convertToLocaciones))
-  }
-  convertToLocaciones(res: Response) {
-    return res.json().map(locacionJson => Locacion.fromJson(locacionJson))
+
+  async getLocaciones(): Promise<any> {
+    const res = await this.http.get(REST_SERVER_URL + "/locaciones").toPromise()
+    return res.json().map(Locacion.fromJson)
   }
 }

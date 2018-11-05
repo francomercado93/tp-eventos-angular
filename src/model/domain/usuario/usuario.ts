@@ -8,15 +8,31 @@ import { fechaHoy } from "src/services/eventos.service";
 
 
 export class Usuario {
-    
+
     amigos: Array<Usuario> = []
     invitaciones: Array<Invitacion> = []
     entradasCompradas: Array<Entrada> = []
     eventosOrganizados: Array<Evento> = []
-    
+
     constructor(public id?: number, private nombre?: string, private apellido?: string, public nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario, public fechaHoraActual?: Date) {
-        // this.fechaHoraActual = fechaHoy()
+        // this.fechaHoraActual.setDate(fechaHoy()
+        this.fechaHoraActual = fechaHoy()
     }
+
+    cantidadEventosSimultaneos(): any {
+        return this.eventosOrganizados.filter(evento => evento.fechaCreacion.getMonth == this.fechaHoraActual.getMonth
+            || evento.finEvento.getMonth == this.fechaHoraActual.getMonth).length
+    }
+
+    puedoCrearEvento(evento: Evento): any {
+        this.tipoUsuario.puedoOrganizarEvento(this, evento)
+    }
+
+    cantidadEventosOrganizadosMes() {
+        return this.eventosOrganizados.filter(evento => evento.fechaCreacion.getMonth == this.fechaHoraActual.getMonth
+            || evento.finEvento.getMonth == this.fechaHoraActual.getMonth).length
+    }
+
     crearEvento(evento: EventoCerrado): any {
         this.eventosOrganizados.push(evento)
     }
@@ -52,24 +68,72 @@ export class Usuario {
 }
 
 export interface TipoUsuario {
-    descripcion: string
+    descripcion: String
+
+    puedoOrganizarEvento(usuario: Usuario, evento: Evento)
+
+    maximaCantidadEventosSimultaneos()
+
+    maximaCantidadEventosPorMes()
+
 }
 
 export class Free implements TipoUsuario {
-    descripcion: string;
+
+    descripcion: String
+
     constructor() {
         this.descripcion = "Free"
     }
+
+    puedoOrganizarEvento(usuario: Usuario, evento: Evento) {
+        evento.tipoUsuarioPuedeOrganizar() && (usuario.cantidadEventosOrganizadosMes() < this.maximaCantidadEventosPorMes()) &&
+            (usuario.cantidadEventosSimultaneos() == this.maximaCantidadEventosSimultaneos())
+    }
+
+    maximaCantidadEventosSimultaneos() {
+        return 0
+    }
+
+    maximaCantidadEventosPorMes() {
+        return 3
+    }
 }
 export class Amateur implements TipoUsuario {
-    descripcion: string;
+
+    descripcion: String;
+
     constructor() {
         this.descripcion = "Amateur"
     }
+
+    maximaCantidadEventosSimultaneos() {
+        5
+    }
+    maximaCantidadEventosPorMes() {
+        0
+    }
+    puedoOrganizarEvento(usuario: Usuario, evento: Evento) {
+        usuario.cantidadEventosSimultaneos() < this.maximaCantidadEventosSimultaneos
+    }
 }
 export class Profesional implements TipoUsuario {
-    descripcion: string;
+
+    descripcion: String;
+
     constructor() {
         this.descripcion = "Profesional"
+    }
+
+    puedoOrganizarEvento(usuario: Usuario, evento: Evento) {
+        usuario.cantidadEventosOrganizadosMes() < this.maximaCantidadEventosPorMes() &&
+            (usuario.cantidadEventosSimultaneos() < this.maximaCantidadEventosSimultaneos())
+    }
+
+    maximaCantidadEventosSimultaneos() {
+        return 20
+    }
+    maximaCantidadEventosPorMes() {
+        return 20
     }
 }

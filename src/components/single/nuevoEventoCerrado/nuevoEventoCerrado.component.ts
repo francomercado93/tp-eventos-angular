@@ -30,43 +30,43 @@ export class NuevoEventoCerradoComponent implements OnInit {
     private router: Router, private usuariosService: UsuariosService) { }
 
   ngOnInit() {
-    this.usuariosService.getUsuarioById(USRTESTID).subscribe(
-      data => this.usuario = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-    this.evento = new EventoCerrado()
+    // this.usuariosService.getUsuarioById(USRTESTID).subscribe(
+    //   data => this.usuario = data,
+    //   error => {
+    //     console.log("error", error)
+    //     this.errors.push(error._body)
+    //   }
+    // )
+    // this.evento = new EventoCerrado()
     
-    const ayer = new Date()
-    ayer.setDate(ayer.getDate() - 1)
-    this.opcionesFecha = {
-      dateFormat: 'dd/mm/yyyy', disableUntil: this.convertirANuevoDate(ayer)
-    }
+    // const ayer = new Date()
+    // ayer.setDate(ayer.getDate() - 1)
+    // this.opcionesFecha = {
+    //   dateFormat: 'dd/mm/yyyy', disableUntil: this.convertirANuevoDate(ayer)
+    // }
 
-    const iniEvento = this.evento.inicioEvento
-    this.inicioModel = {
-      date: this.convertirANuevoDate(iniEvento)
-    }
+    // const iniEvento = this.evento.inicioEvento
+    // this.inicioModel = {
+    //   date: this.convertirANuevoDate(iniEvento)
+    // }
 
-    const finEvento = this.evento.finEvento
-    this.finEventoModel = {
-      date: this.convertirANuevoDate(finEvento)
-    }
-    const fechaMaximaConfirmacionEvento = this.evento.fechaMaximaConfirmacion
-    this.fechaMaximaConfirmacion = {
-      date: this.convertirANuevoDate(fechaMaximaConfirmacionEvento)
-    }
+    // const finEvento = this.evento.finEvento
+    // this.finEventoModel = {
+    //   date: this.convertirANuevoDate(finEvento)
+    // }
+    // const fechaMaximaConfirmacionEvento = this.evento.fechaMaximaConfirmacion
+    // this.fechaMaximaConfirmacion = {
+    //   date: this.convertirANuevoDate(fechaMaximaConfirmacionEvento)
+    // }
 
-    this.locacionesService.getLocaciones().subscribe(
-      data => this.locacionesPosibles = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    // this.locacionesService.getLocaciones().subscribe(
+    //   data => this.locacionesPosibles = data,
+    //   error => {
+    //     console.log("error", error)
+    //     this.errors.push(error._body)
+    //   }
+    // )
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
   convertirANuevoDate(fecha: Date) {
     return {
@@ -86,7 +86,7 @@ export class NuevoEventoCerradoComponent implements OnInit {
   }
   aceptar() {
     console.log(this.evento)
-    this.evento.organizadorEvento = this.usuario
+    // this.evento.organizadorEvento = this.usuario
     this.evento.rechazados = 0
     this.evento.cantidadAsistentesPosibles = 0
 

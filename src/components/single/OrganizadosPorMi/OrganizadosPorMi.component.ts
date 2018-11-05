@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { Evento } from 'src/model/domain/evento/evento';
-import { EventosService } from 'src/services/eventos.service';
+import { EventosService, fechaHoy } from 'src/services/eventos.service';
+import { mostrarError } from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-OrganizadosPorMi',
@@ -14,19 +15,21 @@ export class OrganizadosPorMiComponent implements OnInit {
 
   organizadosPorMi: Array<Evento>
   errors = [];
+  fechaHoy: Date
 
   constructor(private eventosService: EventosService, private router: Router) { }
 
-  ngOnInit() {
-    this.eventosService.getEventosOrganizadosUsuarioById(USRTESTID).subscribe(
-      data => this.organizadosPorMi = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+  async ngOnInit() {
+
+    try {
+      this.fechaHoy = fechaHoy()
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.organizadosPorMi = await this.eventosService.getEventosOrganizadosUsuarioById(USRTESTID)
+    } catch (error) {
+      mostrarError(this, error)
+    }
   }
+
   nuevoEventoAbierto() {
     this.router.navigate(['misEventos/nuevoEventoAbierto'])
   }

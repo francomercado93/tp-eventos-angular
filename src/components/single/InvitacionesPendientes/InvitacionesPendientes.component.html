@@ -14,7 +14,7 @@
       <td>{{invitacion.evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
       <td>{{invitacion.evento.nombreEvento}}</td>
       <td>{{invitacion.evento.locacion.descripcion}}</td>
-      <td>{{invitacion.evento.organizador}}</td>
+      <td>{{invitacion.evento.organizadorEvento}}</td>
 
       <td><input type="number" class="border border-dark rounded" min=0 max={{invitacion.cantidadAcompaniantesMaxima}} (ngValue)="cantidadAcompaniantes"
           required></td>

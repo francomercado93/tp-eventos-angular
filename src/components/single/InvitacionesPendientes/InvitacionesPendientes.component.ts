@@ -5,6 +5,7 @@ import { USRTESTID } from 'src/app/configuration';
 import { InvitacionesService } from 'src/services/invitaciones.service';
 import { fechaHoy } from 'src/services/eventos.service';
 import { EventoCerrado } from 'src/model/domain/evento/eventoCerrado';
+import { mostrarError } from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-InvitacionesPendientes',
@@ -22,17 +23,15 @@ export class InvitacionesPendientesComponent implements OnInit {
 
   constructor(private invitacionesService: InvitacionesService, private router: Router, ) { }
 
-  ngOnInit() {
-    this.invitacionesService.getInvitacionesUsuarioById(USRTESTID).subscribe(
-      data => this.invitacionesPendientes = data,
-      error => {
-        console.log("error", error)
-        this.errors.push(error._body)
-      }
-    )
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
-  }
+  async ngOnInit() {
 
+    try {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false
+      this.invitacionesPendientes = await this.invitacionesService.getInvitacionesUsuarioById(USRTESTID)
+    } catch (error) {
+      mostrarError(this, error)
+    }
+  }
 
   public confirmarInvitacion(invitacion: Invitacion) {
     try {
