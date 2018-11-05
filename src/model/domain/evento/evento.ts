@@ -9,12 +9,19 @@ export class Evento {
         public fechaMaximaConfirmacion?: Date) {
 
     }
+    initialize(): any {
+        this.capacidadMaxima = 0
+        this.cantidadAsistentesPosibles = 0
+        this.rechazados = 0
+    }
+
     validarFechas() {
         if (this.finEvento < this.inicioEvento)
             throw ("La fecha de finalizacion del evento debe ser mayor a la del inicio del evento")
         if (this.fechaMaximaConfirmacion > this.inicioEvento)
             throw ("La fecha maxima de confirmacion no debe superar a la fecha de inicio")
     }
+
     tipoUsuarioPuedeOrganizar(): any {
         return true
     }
@@ -32,7 +39,6 @@ export class Evento {
         const result: any = Object.assign({}, this)
         console.log(result)
         const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-        // result.organizadorEvento = this.organizadorEvento.nombreUsuario
         result.inicioEvento = this.inicioEvento.toLocaleString('es-GB', options)
         result.finEvento = this.finEvento.toLocaleString('es-GB', options)
         result.fechaMaximaConfirmacion = this.fechaMaximaConfirmacion.toLocaleString('es-GB', options)

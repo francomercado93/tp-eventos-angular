@@ -18,7 +18,7 @@ import { MatDatepickerToggle } from '@angular/material';
 })
 export class NuevoEventoAbiertoComponent implements OnInit {
 
-  evento: Evento = new Evento()
+  evento: Evento = new EventoAbierto()
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
@@ -50,10 +50,12 @@ export class NuevoEventoAbiertoComponent implements OnInit {
     }
     // this.evento.initialize(this.usuario)
     this.initialize()
+    this.evento.initialize()
+    this.evento.fechaCreacion = fechaHoy()
+    this.evento.organizadorEvento = this.usuario.nombreUsuario
   }
 
   private initialize() {
-
     const ayer = fechaHoy() //
     ayer.setDate(ayer.getDate() - 1)
     // const iniEvento = this.evento.inicioEvento
@@ -78,13 +80,11 @@ export class NuevoEventoAbiertoComponent implements OnInit {
       year: fecha.getFullYear(),
       month: fecha.getMonth() + 1,
       day: fecha.getDate(),
-      hour: fecha.getHours(),
-      minute: fecha.getMinutes()
     }
   }
   convertirADate(fecha: any): Date {
     if (!fecha) return null
-    return new Date(fecha.date.year, fecha.date.month - 1, fecha.date.day, fecha.date.hour, fecha.date.minute)
+    return new Date(fecha.date.year, fecha.date.month - 1, fecha.date.day, 12, 35)
   }
   cancelar() {
     this.router.navigate(['misEventos/organizadosPorMi'])
@@ -93,25 +93,21 @@ export class NuevoEventoAbiertoComponent implements OnInit {
   aceptar() {
     try {
       this.errors = []
-      // this.evento.inicioEvento = this.convertirADate(this.inicioModel)
-      // this.evento.fechaMaximaConfirmacion = this.convertirADate(this.fechaMaximaConfirmacion)
-      // this.evento.finEvento = this.convertirADate(this.finEventoModel)
-      console.log(this.inicioModel)
-      console.log(this.fechaMaximaConfirmacion)
-      console.log(this.finEventoModel)
-      // console.log(this.evento.inicioEvento)
-      // console.log(this.evento.finEvento)
-      // console.log(this.evento.fechaMaximaConfirmacion)
+      this.evento.inicioEvento = this.convertirADate(this.inicioModel)
+      this.evento.fechaMaximaConfirmacion = this.convertirADate(this.fechaMaximaConfirmacion)
+      this.evento.finEvento = this.convertirADate(this.finEventoModel)
+      // console.log(this.inicioModel)
+      // console.log(this.fechaMaximaConfirmacion)
+      // console.log(this.finEventoModel)
+      console.log(this.evento.inicioEvento)
+      console.log(this.evento.finEvento)
+      console.log(this.evento.fechaMaximaConfirmacion)
       this.evento.validarFechas()
       this.usuario.puedoCrearEvento(this.evento)
       this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
-      // this.router.navigate(['misEventos/organizadosPorMi'])
+      this.router.navigate(['misEventos/organizadosPorMi'])
     } catch (e) {
       this.errors.push(e)
     }
   }
-
-  // validarFechas(){
-  //   return this.convertirADate(this.finEventoModel).getTime() > this.convertirADate(this.inicioModel).getTime()
-  // }
 }
