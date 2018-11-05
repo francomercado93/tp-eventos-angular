@@ -57,5 +57,6 @@ export class AgendaComponent implements OnInit {
   obtenerEventosProximos(): Evento[] {
     return this.agenda.filter(evento => !this.filtroEventosHoy(evento) && !this.filtroSemana(evento))
   }
+  //bla
 }
 
