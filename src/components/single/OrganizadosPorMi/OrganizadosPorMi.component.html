@@ -1,8 +1,8 @@
-<div class="m-2 table-resposive-sm ">
+<div class="m-2 ">
   <h2 style=text-align:center>Organizados por mi</h2>
   <br>
   <div *ngIf="organizadosPorMi">
-    <table class="table table-hover">
+    <table class="table table-hover table-responsive ">
       <tr>
         <th>Fecha</th>
         <th>Evento</th>
@@ -19,7 +19,12 @@
         <td>{{evento.cantidadAsistentesConfirmados}}</td>
         <td>{{evento.rechazados}}</td>
     </table>
-    <button mat-stroked-button color="primary" (click)=nuevoEventoAbierto()>Nuevo Evento Abierto</button>
-    <button mat-stroked-button color="primary" (click)=nuevoEventoCerrado()>Nuevo Evento Cerrado</button>
+    <div class="container">
+      <button mat-stroked-button color="primary" (click)=nuevoEventoAbierto()>Nuevo Evento Abierto
+      </button>
+      <button mat-stroked-button color="primary" (click)=nuevoEventoCerrado()>Nuevo Evento Cerrado
+      </button>
+    </div>
+
   </div>
 </div>

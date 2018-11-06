@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-sm-3">
       <img class="card-img-top img-thumbnail rounded-circle w-50 m-3" src="../../../assets/img/D93.png">
       <h2> {{usuario?.nombre}}</h2>
       <h2>{{usuario?.apellido}}</h2>
@@ -10,11 +10,11 @@
       <p><i class="fas fa-user-alt"></i> {{usuario?.cantidadAmigos}}</p>
 
     </div>
-    <div class="col-9">
+    <div class="col-sm-9">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
       <div *ngIf="usuario?.cantidadAmigos > 0">
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive">
           <tr>
             <th>Nombre</th>
             <th>Username</th>
@@ -31,8 +31,8 @@
           </tr>
         </table>
       </div>
-      <div *ngIf="usuario?.cantidadAmigos == 0">
-        <img class="card-img-top w-auto" src="../../../assets/img/Df_5Mq7UYAEQSoZ.jpg">
+      <div *ngIf="usuario?.cantidadAmigos == 0" class="container-fluid">
+        <img class="card-img-top w-75 img-fluid" src="../../../assets/img/Df_5Mq7UYAEQSoZ.jpg">
       </div>
     </div>
   </div>

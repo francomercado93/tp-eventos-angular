@@ -52,9 +52,10 @@ export class InvitacionesPendientesComponent implements OnInit {
     }
   }
   public rechazarInvitacion(invitacion: Invitacion) {
-    invitacion.invitado = this.usuario
-    console.log(invitacion)
-    invitacion.rechazar()
-    this.invitacionesService.actualizarInvitacion(invitacion)
+    this.invitacionesPendientes.splice(this.invitacionesPendientes.indexOf(invitacion), 1)
+    // invitacion.invitado = this.usuario
+    // console.log(invitacion)
+    // invitacion.rechazar()
+    // this.invitacionesService.actualizarInvitacion(invitacion)
   }
 }
