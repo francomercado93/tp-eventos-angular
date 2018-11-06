@@ -15,7 +15,7 @@ export const routes: Routes = [
       { path: 'agenda', component: AgendaComponent },
       { path: 'pendientes', component: InvitacionesPendientesComponent },
       { path: 'organizadosPorMi', component: OrganizadosPorMiComponent },
-      { path: 'nuevoEvento', component: NuevoEventoComponent },
+      { path: 'nuevoEvento/:tipo', component: NuevoEventoComponent }
     ]
   }
 ]

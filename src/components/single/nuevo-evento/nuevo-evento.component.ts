@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { Evento } from 'src/model/domain/evento/evento';
 import { Usuario } from 'src/model/domain/usuario/usuario';
@@ -9,13 +9,14 @@ import { UsuariosService } from 'src/services/usuarios.service';
 import { mostrarError } from '../perfil/perfil.component';
 
 @Component({
-  selector: 'app-nuevoEventoAbierto',
+  selector: 'app-nuevoEvento',
   templateUrl: './nuevo-evento.component.html',
-  styleUrls: ['./nuevo-evento.component.css']
+  styleUrls: ['./nuevo-evento.component.css'],
+  providers: [LocacionesService, UsuariosService, EventosService]
 })
 export class NuevoEventoComponent implements OnInit {
 
-  evento: Evento = new Evento()
+  evento: Evento //= new Evento()
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
@@ -23,10 +24,17 @@ export class NuevoEventoComponent implements OnInit {
   errors = []
   usuario: Usuario
   opcionesFecha: {}
+  tipoEvento: String;
 
-  constructor(private locacionesService: LocacionesService, private usuariosService: UsuariosService, private eventosService: EventosService, private router: Router) { }
+
+  constructor(private locacionesService: LocacionesService, private usuariosService: UsuariosService, private eventosService: EventosService, private router: Router,
+    private route: ActivatedRoute) { }
 
   async ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.tipoEvento = params['tipo'] //guardo el tipo
+      this.evento = this.eventosService.getTipoEvento(params['tipo'])
+    })
     try {
       this.router.routeReuseStrategy.shouldReuseRoute = () => false
       this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
@@ -79,6 +87,7 @@ export class NuevoEventoComponent implements OnInit {
     if (!fecha) return null
     return new Date(fecha.date.year, fecha.date.month - 1, fecha.date.day, 12, 35)
   }
+
   cancelar() {
     this.router.navigate(['misEventos/organizadosPorMi'])
   }
@@ -89,7 +98,8 @@ export class NuevoEventoComponent implements OnInit {
       this.setearNuevasFechas();
       this.validar();
       this.usuario.puedoCrearEvento(this.evento)
-      this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
+
+      this.eventosService.nuevoEvento(USRTESTID, this.evento, this.tipoEvento)
       this.router.navigate(['misEventos/organizadosPorMi'])
     } catch (e) {
       this.errors.push(e)

@@ -5,14 +5,12 @@ import { Locacion } from "./Locacion";
 
 export class EventoCerrado extends Evento {
 
-    invitadosConfirmados: Array<Usuario> = []
+    // invitadosConfirmados: Array<Usuario> = []
     constructor(public nombreEvento?: String, public capacidadMaxima?: number, public cantidadAsistentesConfirmados?: number, public cantidadAsistentesPosibles?: number,
         public rechazados?: number, public locacion?: Locacion, public fechaCreacion?: Date, public finEvento?: Date, public organizadorEvento?: String, public inicioEvento?: Date,
         public fechaMaximaConfirmacion?: Date) {
         super()
-        this.inicioEvento = new Date()
-        this.finEvento = new Date()
-        this.fechaMaximaConfirmacion = new Date()
+   
     }
     // private capacidadMaxima?: number, private cantidadAsistentesConfirmados?: NUMBER
  
@@ -39,7 +37,7 @@ confirmarUsuario(invitado: Usuario) {
 
 
 agregarListaConfirmado(unUsuario: Usuario) {
-    this.invitadosConfirmados.push(unUsuario)
+    // this.invitadosConfirmados.push(unUsuario)
     // super.removerUsuario(unUsuario)
 }
 }
