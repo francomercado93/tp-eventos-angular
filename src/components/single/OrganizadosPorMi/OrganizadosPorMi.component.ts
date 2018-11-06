@@ -30,13 +30,11 @@ export class OrganizadosPorMiComponent implements OnInit {
     }
   }
 
-  nuevoEventoAbierto() {
-    this.router.navigate(['misEventos/nuevoEventoAbierto'])
+  nuevoEvento() {
+    this.router.navigate(['misEventos/nuevoEvento'])
   }
 
-  nuevoEventoCerrado() {
-    this.router.navigate(['misEventos/nuevoEventoCerrado'])
-  }
+ 
 }
 
 

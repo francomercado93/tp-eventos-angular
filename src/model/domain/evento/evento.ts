@@ -3,12 +3,13 @@ import { Locacion } from "./Locacion";
 import { fechaHoy } from "src/services/eventos.service";
 
 export class Evento {
-
+    
     constructor(public nombreEvento?: String, public capacidadMaxima?: number, public rechazados?: number, public locacion?: Locacion, public fechaCreacion?: Date,
         public finEvento?: Date, public organizadorEvento?: String, public inicioEvento?: Date, public cantidadAsistentesPosibles?: number,
         public fechaMaximaConfirmacion?: Date) {
-
-    }
+            
+        }
+   
     initialize(): any {
         this.capacidadMaxima = 0
         this.cantidadAsistentesPosibles = 0

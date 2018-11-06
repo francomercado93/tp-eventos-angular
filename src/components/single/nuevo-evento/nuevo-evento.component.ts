@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { EventoAbierto } from 'src/model/domain/evento/EventoAbierto';
 import { Router } from '@angular/router';
-import { LocacionesService } from 'src/services/locaciones.service';
-import { EventosService, fechaHoy } from 'src/services/eventos.service';
 import { USRTESTID } from 'src/app/configuration';
 import { Evento } from 'src/model/domain/evento/evento';
-import { UsuariosService } from 'src/services/usuarios.service';
 import { Usuario } from 'src/model/domain/usuario/usuario';
+import { EventosService, fechaHoy } from 'src/services/eventos.service';
+import { LocacionesService } from 'src/services/locaciones.service';
+import { UsuariosService } from 'src/services/usuarios.service';
 import { mostrarError } from '../perfil/perfil.component';
-import { Time } from '@angular/common';
-import { MatDatepickerToggle } from '@angular/material';
 
 @Component({
   selector: 'app-nuevoEventoAbierto',
-  templateUrl: './nuevo-evento-abierto.component.html',
-  styleUrls: ['./nuevo-evento-abierto.component.css']
+  templateUrl: './nuevo-evento.component.html',
+  styleUrls: ['./nuevo-evento.component.css']
 })
-export class NuevoEventoAbiertoComponent implements OnInit {
+export class NuevoEventoComponent implements OnInit {
 
-  evento: Evento = new EventoAbierto()
+  evento: Evento = new Evento()
   inicioModel: any = {}
   finEventoModel: any = {}
   fechaMaximaConfirmacion: any = {}
@@ -48,7 +45,6 @@ export class NuevoEventoAbiertoComponent implements OnInit {
     } catch (error) {
       mostrarError(this, error)
     }
-    // this.evento.initialize(this.usuario)
     this.initialize()
     this.evento.initialize()
     this.evento.fechaCreacion = fechaHoy()
@@ -58,15 +54,12 @@ export class NuevoEventoAbiertoComponent implements OnInit {
   private initialize() {
     const ayer = fechaHoy() //
     ayer.setDate(ayer.getDate() - 1)
-    // const iniEvento = this.evento.inicioEvento
     this.inicioModel = {
       date: this.convertirANuevoDate(fechaHoy())
     }
-    // const finEvento = this.evento.finEvento;
     this.finEventoModel = {
       date: this.convertirANuevoDate(fechaHoy())
     }
-    // const fechaMaximaConfirmacionEvento = this.evento.fechaMaximaConfirmacion;
     this.fechaMaximaConfirmacion = {
       date: this.convertirANuevoDate(fechaHoy())
     };
@@ -93,21 +86,23 @@ export class NuevoEventoAbiertoComponent implements OnInit {
   aceptar() {
     try {
       this.errors = []
-      this.evento.inicioEvento = this.convertirADate(this.inicioModel)
-      this.evento.fechaMaximaConfirmacion = this.convertirADate(this.fechaMaximaConfirmacion)
-      this.evento.finEvento = this.convertirADate(this.finEventoModel)
-      // console.log(this.inicioModel)
-      // console.log(this.fechaMaximaConfirmacion)
-      // console.log(this.finEventoModel)
-      console.log(this.evento.inicioEvento)
-      console.log(this.evento.finEvento)
-      console.log(this.evento.fechaMaximaConfirmacion)
-      this.evento.validarFechas()
+      this.setearNuevasFechas();
+      this.validar();
       this.usuario.puedoCrearEvento(this.evento)
       this.eventosService.actualizarEventosOrganizadosUsuario(USRTESTID, this.evento)
       this.router.navigate(['misEventos/organizadosPorMi'])
     } catch (e) {
       this.errors.push(e)
     }
+  }
+
+  private validar() {
+    this.evento.validarFechas()
+  }
+
+  private setearNuevasFechas() {
+    this.evento.inicioEvento = this.convertirADate(this.inicioModel);
+    this.evento.fechaMaximaConfirmacion = this.convertirADate(this.fechaMaximaConfirmacion);
+    this.evento.finEvento = this.convertirADate(this.finEventoModel);
   }
 }

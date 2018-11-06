@@ -11,23 +11,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MyDatePickerModule } from 'mydatepicker';
-import { MisEventosComponent } from './mis-eventos.component';
-import { NuevoEventoAbiertoComponent } from '../nuevo-evento-abierto/nuevo-evento-abierto.component';
-import { SidenavEventosComponent } from '../sidenav-eventos/sidenav-eventos.component';
 import { AgendaComponent } from '../agenda/agenda.component';
 import { InvitacionesPendientesComponent } from '../InvitacionesPendientes/InvitacionesPendientes.component';
+import { NuevoEventoComponent } from '../nuevo-evento/nuevo-evento.component';
 import { OrganizadosPorMiModule } from '../OrganizadosPorMi/OrganizadosPorMi.module';
-import { NuevoEventoCerradoComponent } from '../nuevoEventoCerrado/nuevoEventoCerrado.component';
-import { AgendaModule } from '../agenda/agenda.module';
+import { SidenavEventosComponent } from '../sidenav-eventos/sidenav-eventos.component';
+import { MisEventosComponent } from './mis-eventos.component';
 
 @NgModule({
   declarations: [
     MisEventosComponent,
-    NuevoEventoAbiertoComponent,
-    NuevoEventoCerradoComponent,
+    NuevoEventoComponent,
     SidenavEventosComponent,
     MisEventosComponent,
-    // AgendaComponent,
+    AgendaComponent,
     InvitacionesPendientesComponent,
   ],
   imports: [
@@ -44,7 +41,6 @@ import { AgendaModule } from '../agenda/agenda.module';
     MatIconModule,
     MatButtonModule,
     MatGridListModule,
-    AgendaModule,
     MatTableModule,
     RouterModule,
   ],

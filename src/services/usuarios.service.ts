@@ -14,6 +14,9 @@ export interface IUsuarioService {
 })
 
 export class UsuariosService implements IUsuarioService {
+
+  usuarioActual: Usuario
+
   constructor(private http: Http) { }
 
   async getUsuarioById(id: number) {

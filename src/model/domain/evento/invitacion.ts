@@ -3,20 +3,20 @@ import { EventoCerrado } from "./eventoCerrado";
 
 export class Invitacion {
 
-    constructor(public invitado?: Usuario, public evento?: EventoCerrado,
-        public cantidadAcompaniantesMaxima?: number, public estaRechazado?: Boolean, public estaConfirmado?: Boolean) {
+
+    constructor(public idInvitado?: number, public invitado?: Usuario, public evento?: EventoCerrado,
+        public cantidadAcompaniantesMaxima?: number, public estaRechazado?: Boolean, public estaConfirmado?: Boolean, public estaPendiente?: boolean) {
     }
 
     static fromJson(invJson) {
         const result: Invitacion = Object.assign(new Invitacion(), invJson)
         result.evento = Object.assign(new EventoCerrado(), invJson.evento)
-        // result.invitado = Object.assign(new Usuario(), invJson.invitado)
-        // result.evento.agregarAsistente(result.invitado)
-        // result.evento = invJson.fromJson(invJson.evento)// no funciona
         return result
     }
     toJSON(): any {
         const result: any = Object.assign({}, this)
+        result.invitado = null
+        // result.evento = null
         return result
     }
 
@@ -29,7 +29,7 @@ export class Invitacion {
 
     rechazar() {
         this.estaRechazado = true
-        // this.evento.usuarioRechazaInvitacion(this.invitado)
+        this.estaPendiente = false
     }
 
 }

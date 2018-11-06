@@ -1,4 +1,4 @@
-<div class="container-fluid border m-2">
+<div class="border m-2 table-resposinve-sm">
   <h2 style=text-align:center><b>Invitaciones Pendientes</b></h2>
   <br>
   <table class="table table-hover">
@@ -15,10 +15,9 @@
       <td>{{invitacion.evento.nombreEvento}}</td>
       <td>{{invitacion.evento.locacion.descripcion}}</td>
       <td>{{invitacion.evento.organizadorEvento}}</td>
-
-      <td><input type="number" class="border border-dark rounded" min=0 max={{invitacion.cantidadAcompaniantesMaxima}} (ngValue)="cantidadAcompaniantes"
-          required></td>
-      <td><button type="button" title="Confirmar invitacion" class="btn btn-success" (click)="confirmarInvitacion(invitacion)"
+      <td><input type="number" class="border border-dark rounded" min=0 max={{invitacion.cantidadAcompaniantesMaxima}}
+          (ngValue)="cantidadAcompaniantes" required></td>
+      <td><button type="button" title="Confirmar invitacion" class="btn btn-success" [disabled]="cantidadAcompaniantes == null"(click)="confirmarInvitacion(invitacion)"
           aria-label="Confirmar" type="submit">
           <i class="fas fa-check-circle"></i>
         </button>&nbsp;

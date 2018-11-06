@@ -29,5 +29,11 @@ export class PerfilComponent implements OnInit {
     } catch (error) {
       mostrarError(this, error)
     }
+    this.usuariosService.usuarioActual = this.usuario
+  }
+
+  eliminarAmigo(amigo: Usuario) {
+    this.usuario.eliminarAmigo(amigo)
+    this.usuariosService.actualizarUsuario(this.usuario, amigo)
   }
 }

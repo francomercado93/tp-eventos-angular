@@ -1,0 +1,58 @@
+<div class="container-fluid border ">
+  <!-- <router-outlet></router-outlet> -->
+  <form>
+    <div class="form-row">
+      <div class="form-group col">
+        <label>Nombre</label>
+        <input class="form-control" required [(ngModel)]="evento.nombreEvento" #nombreEvento="ngModel" name="nombreEvento"
+          placeholder="Ingrese nombre" autofocus>
+      </div>
+      <div class="form-group col">
+        <label>Locacion</label>
+        <select class="form-control" id="locacion" name="locacion" required [(ngModel)]="evento.locacion" #locacion="ngModel">
+          <option *ngFor="let locacion of locacionesPosibles" [ngValue]="locacion">{{locacion.descripcion}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label>Inicio</label>
+        <my-date-picker name="inicioEvento" [options]="opcionesFecha" [(ngModel)]="inicioModel">
+        </my-date-picker>
+      </div>
+      <div class="
+          form-group col">
+        <label>Fin</label>
+        <my-date-picker name="finEvento" [options]="opcionesFecha" [(ngModel)]="finEventoModel">
+        </my-date-picker>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label>Fecha maxima de confirmacion</label>
+        <my-date-picker name="fechaMaximaConfirmacion" [options]="opcionesFecha" [(ngModel)]="fechaMaximaConfirmacion">
+        </my-date-picker>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="nombreEvento.invalid && (nombreEvento.dirty || nombreEvento.touched)">
+    <div class="alert alert-danger">
+      <br>Error:
+      <span *ngIf="nombreEvento.errors.required">Debe ingresar nombre de evento</span>
+    </div>
+  </div>
+  <div *ngIf="locacion.invalid && (locacion.dirty || locacion.touched)">
+    <div class="alert alert-danger">
+      <br>Error:
+      <span *ngIf="locacion.errors.required">Debe seleccionar una locacion</span>
+    </div>
+  </div>
+  <div class="alert alert-danger animate-repeat" *ngFor="let error of errors">
+    {{error}}
+  </div>
+  <div class="btn-group " role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-info text-left" [disabled]="locacion.errors || nombreEvento.errors" (click)="aceptar()"
+      type="submit">Aceptar</button>
+    <button type="button" class="btn btn-danger text-left" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>

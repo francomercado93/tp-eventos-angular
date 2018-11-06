@@ -1,24 +1,25 @@
-<div class="container-fluid  m-2">
+<div class="m-2 table-resposive-sm ">
   <h2 style=text-align:center>Organizados por mi</h2>
   <br>
-  <table class="table table-hover">
-    <tr>
-      <th>Fecha</th>
-      <th>Evento</th>
-      <th>Lugar</th>
-      <th>Invitados</th>
-      <th>Confirmados</th>
-      <th>Rechazados</th>
-    </tr>
-    <tr *ngFor="let evento of organizadosPorMi">
-      <td>{{evento.inicioEvento | date : 'dd/MM/yyyy HH:mm' }}</td>
-      <td>{{evento.nombreEvento}}</td>
-      <td>{{evento.locacion.descripcion}}</td>
-      <td>{{evento.cantidadAsistentesPosibles}}</td>
-      <td>{{evento.cantidadAsistentesConfirmados}}</td>
-      <td>{{evento.rechazados}}</td>
-  </table>
-
-  <button mat-stroked-button color="primary" (click)=nuevoEventoAbierto()>Nuevo Evento Abierto</button>
-  <button mat-stroked-button color="primary" (click)=nuevoEventoCerrado()>Nuevo Evento Cerrado</button>
+  <div *ngIf="organizadosPorMi">
+    <table class="table table-hover">
+      <tr>
+        <th>Fecha</th>
+        <th>Evento</th>
+        <th>Lugar</th>
+        <th>Invitados</th>
+        <th>Confirmados</th>
+        <th>Rechazados</th>
+      </tr>
+      <tr *ngFor="let evento of organizadosPorMi">
+        <td>{{evento.inicioEvento | date : 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{evento.nombreEvento}}</td>
+        <td>{{evento.locacion.descripcion}}</td>
+        <td>{{evento.cantidadAsistentesPosibles}}</td>
+        <td>{{evento.cantidadAsistentesConfirmados}}</td>
+        <td>{{evento.rechazados}}</td>
+      </table>
+      <button mat-stroked-button color="primary" (click)=nuevoEvento()>Nuevo Evento Abierto</button>
+      <button mat-stroked-button color="primary" (click)=nuevoEvento()>Nuevo Evento Cerrado</button>
+    </div>
 </div>

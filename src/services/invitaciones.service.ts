@@ -23,7 +23,7 @@ export class InvitacionesService {
     console.log(invitacion.evento)
     console.log(invitacion.estaConfirmado)
     console.log(invitacion.estaRechazado)
-    return this.http.put(REST_SERVER_URL + "/usuarios/" + invitacion.invitado.id + "/invitacion", invitacion.toJSON()).toPromise()
+    return this.http.post(REST_SERVER_URL + "/usuarios/" + invitacion.idInvitado + "/invitacion", invitacion.toJSON()).toPromise()
   }
 
 }
