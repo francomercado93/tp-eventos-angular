@@ -18,7 +18,7 @@
         <td>{{invitacion.evento.organizadorEvento}}</td>
         <td><input type="number" class="border border-dark rounded" min=0 max={{invitacion.cantidadAcompaniantesMaxima}}
             (ngValue)="cantidadAcompaniantes" required></td>
-        <td><button type="button" title="Confirmar invitacion" class="btn btn-success" [disabled]="cantidadAcompaniantes == null"
+        <td><button type="button" title="Confirmar invitacion" class="btn btn-success" 
             (click)="confirmarInvitacion(invitacion)" aria-label="Confirmar" type="submit">
             <i class="fas fa-check-circle"></i>
           </button>&nbsp;

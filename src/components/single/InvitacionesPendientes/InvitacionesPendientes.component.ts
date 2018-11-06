@@ -13,7 +13,7 @@ import { Invitacion } from 'src/model/domain/evento/invitacion';
   selector: 'app-InvitacionesPendientes',
   templateUrl: './InvitacionesPendientes.component.html',
   styleUrls: ['./InvitacionesPendientes.component.css'],
-  providers: [InvitacionesService]
+  providers: [InvitacionesService, UsuariosService, EventosService]
 })
 export class InvitacionesPendientesComponent implements OnInit {
 
@@ -30,45 +30,27 @@ export class InvitacionesPendientesComponent implements OnInit {
 
   async ngOnInit() {
 
+    this.invitacionesPendientes = await this.invitacionesService.getInvitacionesUsuarioById(USRTESTID)
+    this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    try {
-      this.eventosInvitaciones = await this.eventosService.getEventosDeInvitaciones(USRTESTID)
-    } catch (error) {
-      mostrarError(this, error)
-    }
-    try {
-      this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
-    } catch (error) {
-      mostrarError(this, error)
-    }
-    try {
-      this.invitacionesPendientes = await this.invitacionesService.getInvitacionesUsuarioById(USRTESTID)
-      this.invitacionesPendientes.forEach(invitacion => invitacion.evento =
-        this.eventosInvitaciones.find(evento => evento.nombreEvento ==  invitacion.evento.nombreEvento))
-      this.invitacionesPendientes.forEach(invitacion => invitacion.invitado = this.usuario)
-    } catch (error) {
-      mostrarError(this, error)
-    }
 
   }
 
   public confirmarInvitacion(invitacion: Invitacion) {
     try {
-      this.errorMessage = ""
-      // invitacion.confirmar(this.cantidadAcompaniantes)
-    } catch (errorValidation) {
-      this.errorMessage = errorValidation
+      this.invitacionesService.actualizarInvitacionesConfirmadas(invitacion)
+      invitacion.evento.confirmarUsuario(this.usuario)
+      this.borrarInvitacion(invitacion)
+    } catch (error) {
+      mostrarError(this, error)
     }
-    this.removerInvitacionLista(invitacion)
   }
-  public rechazarInvitacion(invitacion: Invitacion) {
-    this.removerInvitacionLista(invitacion);
-    invitacion.rechazar()
-    this.invitacionesService.eliminarInvitacion(invitacion)
-    // this.eventosService.actualizarInvitacionRechazadaEvento(invitacion.evento)
+  rechazarInvitacion(invitacion: Invitacion) {
+    this.borrarInvitacion(invitacion)
   }
 
-  private removerInvitacionLista(invitacion: Invitacion) {
-    this.invitacionesPendientes.splice(this.invitacionesPendientes.indexOf(invitacion), 1);
+  borrarInvitacion(invitacion: Invitacion) {
+    this.invitacionesPendientes.splice(this.invitacionesPendientes.indexOf(invitacion), 1)
+    this.invitacionesService.actualizarInvitacioneRechazadas(invitacion)
   }
 }

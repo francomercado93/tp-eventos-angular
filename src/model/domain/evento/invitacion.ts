@@ -9,7 +9,7 @@ export class Invitacion {
 
     static fromJson(invJson) {
         const result: Invitacion = Object.assign(new Invitacion(), invJson)
-        result.evento = new EventoCerrado(invJson.evento)
+        result.evento =Object.assign(new EventoCerrado(), invJson.evento)
         return result
     }
     toJSON(): any {

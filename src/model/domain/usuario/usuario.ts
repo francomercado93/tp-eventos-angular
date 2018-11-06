@@ -1,21 +1,16 @@
-import { Invitacion } from "../evento/invitacion";
-import { Entrada } from "../evento/entrada";
-import { Evento } from "../evento/evento";
-import { EventoAbierto } from "../evento/EventoAbierto";
-import { EventoCerrado } from "../evento/eventoCerrado";
-import { Testability } from "@angular/core";
 import { fechaHoy } from "src/services/eventos.service";
+import { Evento } from "../evento/evento";
+import { EventoCerrado } from "../evento/eventoCerrado";
+import { Invitacion } from "../evento/invitacion";
 
 
 export class Usuario {
 
     amigos: Array<Usuario> = []
-    invitaciones: Array<Invitacion> = []
-    entradasCompradas: Array<Entrada> = []
+    invitacionesPendientes: Array<Invitacion> = []
     eventosOrganizados: Array<Evento> = []
 
     constructor(public id?: number, private nombre?: string, private apellido?: string, public nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario, public fechaHoraActual?: Date) {
-        // this.fechaHoraActual.setDate(fechaHoy()
         this.fechaHoraActual = fechaHoy()
     }
 
