@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <img class="card-img-top img-thumbnail rounded-circle w-50 m-3" src="../../../assets/img/D93.png">
+      <h2> {{usuario?.nombre}}</h2>
+      <h2>{{usuario?.apellido}}</h2>
+      <p>@{{usuario?.nombreUsuario}}</p>
+      <p> <i class="fas fa-star"></i> {{usuario?.tipoUsuario.descripcion}} </p>
+      <p><i class="fas fa-envelope-square"></i> {{usuario?.mail}}</p>
+      <p><i class="fas fa-user-alt" id="cantAmigos"></i> {{usuario?.cantidadAmigos}}</p>
+
+    </div>
+    <div class="col-sm-9">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+      <div *ngIf="usuario?.cantidadAmigos > 0">
+        <table class="table table-hover ">
+          <tr>
+            <th>Nombre</th>
+            <th>Username</th>
+            <th>Eliminar</th>
+          </tr>
+          <tr *ngFor="let amigo of usuario?.amigos">
+            <td>{{amigo.nombre}} {{amigo.apellido}}</td>
+            <td>{{amigo.nombreUsuario}}</td>
+            <td>
+              <button color="warn" type="button" title="Eliminar amigo" class="btn btn-danger" (click)="eliminarAmigo(amigo)" aria-label="Eliminar"
+                id="amigoElim">
+                <i class="fas fa-times"></i></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="usuario?.cantidadAmigos == 0" class="container-fluid">
+        <img class="card-img-top w-75 img-fluid" src="../../../assets/img/Df_5Mq7UYAEQSoZ.jpg">
+      </div>
+    </div>
+  </div>
+</div>

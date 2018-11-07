@@ -1,0 +1,40 @@
+<div class="border m-2 ">
+  <h2 style=text-align:center><b>Invitaciones Pendientes</b></h2>
+  <br>
+  <div *ngIf="invitacionesPendientes.length > 0">
+    <table class="table table-hover table-responsive-sm">
+      <tr>
+        <th>Fecha</th>
+        <th>Evento</th>
+        <th>Lugar</th>
+        <th>Organizador</th>
+        <th>Acompañantes</th>
+        <th>Aceptar/Rechazar</th>
+      </tr>
+      <tr *ngFor="let invitacion of invitacionesPendientes">
+        <td>{{invitacion.evento.inicioEvento | date : 'dd/MM/yyyy H:m'}}</td>
+        <td>{{invitacion.evento.nombreEvento}}</td>
+        <td>{{invitacion.evento.locacion.descripcion}}</td>
+        <td>{{invitacion.evento.organizadorEvento}}</td>
+        <td><input type="number" class="border border-dark rounded" min=0 max={{invitacion.cantidadAcompaniantesMaxima}} [(ngModel)]="invitacion.cantidadAcompaniantes"
+            required></td>
+        <td>
+          <button type="button" title="Confirmar invitacion" class="btn btn-success" (click)="confirmarInvitacion(invitacion) " aria-label="Confirmar "
+            type="submit ">
+            <i class="fas fa-check-circle "></i>
+          </button>&nbsp;
+          <button type="button " title="Rechazar invitacion " class="btn btn-danger " (click)="rechazarInvitacion(invitacion)
+            " aria-label="Rechazar ">
+            <i class="fas fa-times "></i>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="alert alert-danger " *ngFor="let error of errors">
+    {{error}}
+  </div>
+  <div *ngIf="invitacionesPendientes.length==0 " class="alert alert-primary " role="alert ">
+    <h1>No tenes invitacionesPendientes</h1>
+  </div>
+</div>
