@@ -28,6 +28,7 @@ export class OrganizadosPorMiComponent implements OnInit {
     } catch (error) {
       mostrarError(this, error)
     }
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
 
   nuevoEventoAbierto() {

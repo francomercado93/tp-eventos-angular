@@ -16,6 +16,8 @@ import { MisEventosModule } from 'src/components/single/mis-eventos/mis-eventos.
 import { PerfilComponent } from 'src/components/single/perfil/perfil.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
     declarations: [
@@ -37,6 +39,7 @@ import { AppComponent } from './app.component';
         BrowserAnimationsModule,
         MisEventosModule,
         HttpModule,
+        MatSnackBarModule,
         AppRoutingModule,
 
     ],

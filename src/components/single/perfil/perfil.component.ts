@@ -24,12 +24,12 @@ export class PerfilComponent implements OnInit {
 
   async ngOnInit() {
     try {
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false
       this.usuario = await this.usuariosService.getUsuarioById(USRTESTID)
+      this.usuario.amigos = await this.usuariosService.getAmigosUsuarioById(USRTESTID)
     } catch (error) {
       mostrarError(this, error)
     }
-    this.usuariosService.usuarioActual = this.usuario
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
 
   eliminarAmigo(amigo: Usuario) {

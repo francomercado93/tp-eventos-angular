@@ -9,11 +9,11 @@ export class Usuario {
     amigos: Array<Usuario> = []
     invitacionesPendientes: Array<Invitacion> = []
     eventosOrganizados: Array<Evento> = []
-    
+
     constructor(public id?: number, private nombre?: string, private apellido?: string, public nombreUsuario?: string, private mail?: string, public tipoUsuario?: TipoUsuario, public fechaHoraActual?: Date) {
         this.fechaHoraActual = fechaHoy()
     }
-    
+
     agregarAmigo(amigo: Usuario) {
         this.amigos.push(amigo)
     }
@@ -43,19 +43,17 @@ export class Usuario {
 
     static fromJson(usuarioJson) {
         const result: Usuario = Object.assign(new Usuario(), usuarioJson) //verificar
-        this.asignarTipoUsuario(usuarioJson, result)
         result.fechaHoraActual = fechaHoy()
         return result
     }
 
-
-    static asignarTipoUsuario(usuarioJson, result) {
+    static asignarTipoUsuario(usuarioJson) {
         if (usuarioJson.tipoUsuario == "Free")
-            result.tipoUsuario = new Free()
+            return new Free()
         if (usuarioJson.tipoUsuario == "Amateur")
-            result.tipoUsuario = new Amateur()
+            return new Amateur()
         if (usuarioJson.tipoUsuario == "Profesional")
-            result.tipoUsuario = new Profesional()
+            return new Profesional()
     }
     get cantidadAmigos() {
         return this.amigos.length

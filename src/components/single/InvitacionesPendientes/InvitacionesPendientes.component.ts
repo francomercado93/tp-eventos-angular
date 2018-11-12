@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { InvitacionesService } from 'src/services/invitaciones.service';
@@ -24,7 +25,7 @@ export class InvitacionesPendientesComponent implements OnInit {
   usuario: Usuario
   eventosInvitaciones: Array<EventoCerrado>;
 
-  constructor(private invitacionesService: InvitacionesService, private router: Router,
+  constructor(public snackBar: MatSnackBar, private invitacionesService: InvitacionesService, private router: Router,
     private usuariosService: UsuariosService, private eventosService: EventosService) { }
 
   async ngOnInit() {
@@ -34,14 +35,19 @@ export class InvitacionesPendientesComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
 
   }
+  openSnackBar() {
+    const ok = "OK"
+    this.snackBar.open(this.errorMessage, ok, {
+      duration: 2000,
+    });
+  }
 
   public confirmarInvitacion(invitacion: Invitacion) {
     try {
-      this.validar(invitacion)
       this.invitacionesService.actualizarInvitacionesConfirmadas(invitacion)
       this.borrarInvitacion(invitacion)
     } catch (e) {
-      this.errors.push(e)
+      this.errorMessage = e
     }
   }
   rechazarInvitacion(invitacion: Invitacion) {
@@ -53,8 +59,15 @@ export class InvitacionesPendientesComponent implements OnInit {
     this.invitacionesService.actualizarInvitacioneRechazadas(invitacion)
   }
 
-  validar(invitacion: Invitacion) {
-    if (invitacion.cantidadAcompaniantes <= 0 || invitacion.cantidadAcompaniantes >= invitacion.cantidadAcompaniantesMaxima)
-      throw ("Cantidad de acompaniantes no valida")
+  cantidadNoEsValida(invitacion: Invitacion) {
+    return (invitacion.cantidadAcompaniantes == null || invitacion.cantidadAcompaniantes < 0 || invitacion.cantidadAcompaniantes >= invitacion.cantidadAcompaniantesMaxima)
   }
+
+  cargaNotificacion(invitacion: Invitacion) {
+    if (this.cantidadNoEsValida(invitacion)) {
+      this.errorMessage = "Error: cantidad de invitados no valida"
+      this.openSnackBar()
+    }
+  }
+
 }
