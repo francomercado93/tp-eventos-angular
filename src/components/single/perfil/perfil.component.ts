@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/model/domain/usuario/usuario';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { UsuariosService } from 'src/services/usuarios.service';
 

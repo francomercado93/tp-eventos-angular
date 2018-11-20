@@ -2,18 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
-import { InvitacionesService } from 'src/services/invitaciones.service';
-import { fechaHoy, EventosService } from 'src/services/eventos.service';
-import { mostrarError } from '../perfil/perfil.component';
-import { UsuariosService } from 'src/services/usuarios.service';
-import { Usuario } from 'src/model/domain/usuario/usuario';
 import { EventoCerrado } from 'src/model/domain/evento/eventoCerrado';
 import { Invitacion } from 'src/model/domain/evento/invitacion';
+import { Usuario } from 'src/model/domain/usuario/usuario';
+import { EventosService } from 'src/services/eventos.service';
+import { InvitacionesService } from 'src/services/invitaciones.service';
+import { UsuariosService } from 'src/services/usuarios.service';
 
 @Component({
   selector: 'app-InvitacionesPendientes',
   templateUrl: './InvitacionesPendientes.component.html',
-  styleUrls: ['./InvitacionesPendientes.component.css'],
   providers: [InvitacionesService, UsuariosService, EventosService]
 })
 export class InvitacionesPendientesComponent implements OnInit {

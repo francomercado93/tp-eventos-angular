@@ -8,7 +8,7 @@ import { USRTESTID } from 'src/app/configuration';
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
-  styleUrls: ['./agenda.component.css'],
+
   providers: [EventosService]
 })
 export class AgendaComponent implements OnInit {

@@ -1,7 +1,7 @@
-<div class="border">
+<div class="border container-fluid">
   <h2 style=text-align:center><b>Agenda</b></h2>
   <br>
-  <table class="table table-borderless table-resposive-sm ">
+  <table class="table table-borderless table-responsive-sm">
     <thead>
       <tr>
         <th scope="col" colspan="4">Hoy</th>
@@ -9,7 +9,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let evento of eventosHoy">
-        <!-- <app-evento-detail [evento]="evento"></app-evento-detail> -->
         <td>{{evento.inicioEvento| date : 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{evento.nombreEvento}}</td>
         <td>{{evento.locacion.descripcion}}</td>

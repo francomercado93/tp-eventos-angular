@@ -24,3 +24,5 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export const routingComponents = [PerfilComponent, MisEventosComponent, AgendaComponent, InvitacionesPendientesComponent, OrganizadosPorMiComponent, NuevoEventoComponent]

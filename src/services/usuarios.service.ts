@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from "@angular/http";
 import { REST_SERVER_URL } from 'src/app/configuration';
 import { Usuario } from 'src/model/domain/usuario/usuario';
+import { of } from 'rxjs';
 
 export interface IUsuarioService {
   getAmigosUsuarioById(id: number): Promise<any>
@@ -33,16 +34,22 @@ export class UsuariosService implements IUsuarioService {
   }
 
 }
-export default class StubUsuariosService {
+export default class StubUsuariosService implements IUsuarioService {
+  usrppal = new Usuario(0, 'Joaquin', 'Perreyra', 'Joak', 'joaco88@gmail.com', new Profesional())
+  amigos = [(new Usuario(1, 'Juan', 'Quiroga', 'juan01', 'juan01@gmail.com', new Profesional())),
+  (new Usuario(2, 'Martin', 'Benitez', 'tinchoB', 'tincho92@gmail.com', new Profesional())),
+  (new Usuario(2, 'Martin', 'Benitez', 'tinchoB', 'tincho92@gmail.com', new Profesional()))]
 
-  getUsuarioById(id: number) {
-    const ppal = new Usuario(0, 'Joaquin', 'Perreyra', 'Joak', 'joaco88@gmail.com', new Profesional())
-    ppal.agregarAmigo(new Usuario(1, 'Juan', 'Quiroga', 'juan01', 'juan01@gmail.com', new Profesional()))
-    ppal.agregarAmigo(new Usuario(2, 'Martin', 'Benitez', 'tinchoB', 'tincho92@gmail.com', new Profesional()))
-    ppal.agregarAmigo(new Usuario(2, 'Martin', 'Benitez', 'tinchoB', 'tincho92@gmail.com', new Profesional()))
-    return ppal
+  async getUsuarioById(id: number) {
+    return this.usrppal
   }
 
+  async getAmigosUsuarioById(id: number) {
+    return this.amigos
+  }
+
+  async actualizarUsuario(usuario: Usuario, amigo: Usuario) {
+  }
 }
 // @Injectable({
 //   providedIn: 'root'
