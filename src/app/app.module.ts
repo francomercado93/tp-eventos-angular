@@ -17,6 +17,7 @@ import { PerfilComponent } from 'src/components/single/perfil/perfil.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {FormsModule} from '@angular/forms' 
 
 
 @NgModule({
