@@ -1,4 +1,11 @@
 # TpEventosApp
+Aplicación Web que utilizarán los usuarios finales.Cuenta con dos secciones; “Mis Eventos” y “Perfil”. A su vez, desde la vista “Mis Eventos”, podremos acceder a las tres subsecciones “Agenda”, “Organizados por mi” y “Pendientes”. 
+
+Enunciado del trabajo practico de la facultad:
+https://docs.google.com/document/d/1BDOTbKK8VvUrL8iE-n_SRFq0bH8iexQ3SYAihqYpkhs/edit
+
+Backend de la aplicacion(branch backendAngular):
+https://github.com/francomercado93/tp-eventos-backend 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
