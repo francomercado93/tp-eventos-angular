@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,18 +11,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import 'hammerjs';
+import { MyDatePickerModule } from 'mydatepicker';
 import { ToolbarComponent } from 'src/components/share/toolbar/toolbar.component';
-import { MisEventosModule } from 'src/components/single/mis-eventos/mis-eventos.module';
-import { PerfilComponent } from 'src/components/single/perfil/perfil.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SidenavEventosComponent } from 'src/components/single/sidenav-eventos/sidenav-eventos.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ToolbarComponent,
-        PerfilComponent,
+        routingComponents,
+        SidenavEventosComponent
     ],
     imports: [
         CommonModule,
@@ -35,13 +38,28 @@ import { AppComponent } from './app.component';
         MatGridListModule,
         MatTableModule,
         BrowserAnimationsModule,
-        MisEventosModule,
         HttpModule,
         AppRoutingModule,
+        FormsModule,
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserModule,
+        MatButtonModule,
+        RouterModule,
+        MyDatePickerModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatListModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatTableModule,
+        RouterModule,
 
     ],
     providers: [
-        // MatDatepickerModule
     ],
     bootstrap: [
         AppComponent
