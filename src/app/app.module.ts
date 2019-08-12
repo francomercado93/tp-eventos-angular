@@ -18,6 +18,8 @@ import { ToolbarComponent } from 'src/components/share/toolbar/toolbar.component
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidenavEventosComponent } from 'src/components/single/sidenav-eventos/sidenav-eventos.component';
+import { MatCardModule } from '@angular/material/card';
+
 
 @NgModule({
     declarations: [
@@ -57,7 +59,7 @@ import { SidenavEventosComponent } from 'src/components/single/sidenav-eventos/s
         MatGridListModule,
         MatTableModule,
         RouterModule,
-
+        MatCardModule
     ],
     providers: [
     ],
