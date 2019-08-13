@@ -1,8 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Usuario } from 'src/model/domain/usuario/usuario';
 import { Router, ActivatedRoute } from '@angular/router';
 import { USRTESTID } from 'src/app/configuration';
 import { UsuariosService } from 'src/services/usuarios.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+export interface DialogData {
+  usuario: Usuario
+  amigo: Usuario
+  usuariosService: UsuariosService
+}
 
 export function mostrarError(component, error) {
   console.log("error", error)
@@ -20,7 +27,7 @@ export class PerfilComponent implements OnInit {
   usuario: Usuario;
   errors = [];
 
-  constructor(private usuariosService: UsuariosService, private router: Router) { }
+  constructor(private usuariosService: UsuariosService, private router: Router, public dialog: MatDialog) { }
 
   async ngOnInit() {
     try {
@@ -32,8 +39,27 @@ export class PerfilComponent implements OnInit {
     this.usuariosService.usuarioActual = this.usuario
   }
 
-  eliminarAmigo(amigo: Usuario) {
-    this.usuario.eliminarAmigo(amigo)
-    this.usuariosService.actualizarUsuario(this.usuario, amigo)
+  openDialog(amigo: Usuario) {
+    const dialogRef = this.dialog.open(DialogConfirmacion, {
+      data: {
+        usuario: this.usuario,
+        amigo: amigo,
+        usuariosService: this.usuariosService
+      }
+    })
   }
 }
+
+@Component({
+  selector: 'dialog-confirmacion',
+  templateUrl: 'dialog-confirmacion.html',
+})
+export class DialogConfirmacion {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  eliminarAmigo(): void {
+    this.data.usuario.eliminarAmigo(this.data.amigo)
+    this.data.usuariosService.actualizarUsuario(this.data.usuario, this.data.amigo)
+  }
+}
+

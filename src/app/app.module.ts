@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -15,10 +17,10 @@ import { RouterModule } from '@angular/router';
 import 'hammerjs';
 import { MyDatePickerModule } from 'mydatepicker';
 import { ToolbarComponent } from 'src/components/share/toolbar/toolbar.component';
+import { SidenavEventosComponent } from 'src/components/single/sidenav-eventos/sidenav-eventos.component';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidenavEventosComponent } from 'src/components/single/sidenav-eventos/sidenav-eventos.component';
-import { MatCardModule } from '@angular/material/card';
+import { DialogConfirmacion } from 'src/components/single/perfil/perfil.component';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { MatCardModule } from '@angular/material/card';
         AppComponent,
         ToolbarComponent,
         routingComponents,
-        SidenavEventosComponent
+        SidenavEventosComponent,
+        DialogConfirmacion
     ],
     imports: [
         CommonModule,
@@ -59,8 +62,10 @@ import { MatCardModule } from '@angular/material/card';
         MatGridListModule,
         MatTableModule,
         RouterModule,
+        MatDialogModule,
         MatCardModule
     ],
+    entryComponents:[DialogConfirmacion],
     providers: [
     ],
     bootstrap: [
